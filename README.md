@@ -7,6 +7,37 @@ Projet 7 de la formation Web Développeur d'OpenClassrooms Créez un réseau soc
 - [Express]
 - [MongoDB]
 
+## Installation du backend ##
+
+Dans le dossier backend du projet.
+
+### Backend - Variables d'environnement ###
+
+Avant de lancer ce projet, vous devrez ajouter les variables d'environnement suivantes dans un fichier .env
+
+- PORT
+- DB_USER
+- DB_PASSWORD
+- DB_HOST
+- DB_NAME
+
+### Installer les dépendances ###
+
+```bash
+npm install
+```
+
+### Démarrer le serveur ###
+
+Start :
+```bash
+node server
+```
+
+Dev :
+```bash
+nodemon server
+```
 
 
    [Node.js]: <http://nodejs.org>
