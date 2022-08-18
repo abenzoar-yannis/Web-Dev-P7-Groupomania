@@ -1,0 +1,5 @@
+keys-steps.txt
+
+#Backend
+node_modules
+.env
