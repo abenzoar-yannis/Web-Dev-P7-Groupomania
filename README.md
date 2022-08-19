@@ -3,9 +3,10 @@ Projet 7 de la formation Web Développeur d'OpenClassrooms Créez un réseau soc
 
 ## Technologies utilisées ##
 
-- [Node.js]
-- [Express]
 - [MongoDB]
+- [Express]
+- [ReactJS]
+- [Node.js]
 
 ## Installation du backend ##
 
@@ -40,6 +41,7 @@ nodemon server
 ```
 
 
+   [ReactJS]: <https://fr.reactjs.org/>
    [Node.js]: <http://nodejs.org>
    [MongoDB]: <https://www.mongodb.com/>
    [Express]: <http://expressjs.com>

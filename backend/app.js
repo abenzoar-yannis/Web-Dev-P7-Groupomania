@@ -9,6 +9,9 @@ require("dotenv").config({ path: ".env" });
 /* chargement des fonctions d'express */
 const app = express();
 
+/* --- IMPORT ROUTES --- */
+const userRoutes = require("./routes/user");
+
 /* --- MIDDLEWARE --- */
 app.use(express.json());
 
@@ -37,9 +40,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res) => {
-  res.json({ message: "Votre requête a bien été reçue !" });
-});
+/* --- ROUTES PARAMETRE --- */
+app.use("/api/auth", userRoutes);
 
 /* EXPORT de l'application */
 module.exports = app;
