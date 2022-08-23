@@ -1,5 +1,10 @@
 keys-steps.txt
 
-#Backend
+#backend
 node_modules
 .env
+
+#frontend
+node_modules
+landing-page.html
+test-style.css
