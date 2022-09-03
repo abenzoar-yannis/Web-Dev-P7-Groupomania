@@ -139,4 +139,22 @@ main {
   font-weight: bold;
 }
 
+.is-new-account {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: #14be14;
+}
+
+.error-message {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: #FD2D01;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -19,7 +19,7 @@ const userApiRequest = async (email, password, action) => {
     
     fetch(`http://localhost:3000/api/auth/${action}`, requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => setIsNewAccount(result))
       .catch(error => console.log('error', error));
   }
 

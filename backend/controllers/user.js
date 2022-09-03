@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
       user
         .save()
         .then(() =>
-          res.status(201).json({ message: "Nouvelle utilisateur créé !" })
+          res.status(201).json({ message: "Votre compte a été créé !" })
         )
         .catch((error) => res.status(400).json({ error }));
     })
@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
       if (!user) {
         return res
           .status(401)
-          .json({ message: "Login ou mot de passe incorrecte !" });
+          .json({ message: "Email ou mot de passe incorrecte !" });
       }
       // comparer le mot de passe entré par l'utilisateur avec le hash enregistré dans la base de données
       bcrypt
@@ -45,7 +45,7 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res
               .status(401)
-              .json({ message: "Login ou mot de passe incorrecte !" });
+              .json({ message: "Email ou mot de passe incorrecte !" });
           }
           res.status(200).json({
             userId: user._id,
