@@ -1,0 +1,25 @@
+/* Landing Page CSS
+./sass/pages/landing-page.scss */
+
+/* Header */
+.landing-page-header {
+    height: 300px;
+    padding: 0 2rem;
+    @include display-flex-column-center-center
+}
+
+.landing-page-header h1 {
+    padding: 1rem;
+
+    font-size: 3rem;
+    color: #FFD7D7;
+    text-align: center;
+}
+
+.landing-page-header p {
+    font-size: 1.5rem;
+}
+
+main {
+    @include display-flex-content-center
+}
