@@ -4,8 +4,8 @@ import NewAccountBtn from './NewAccountBtn'
 const Nav = () => {
   return (
     <nav>
-        <ConnectionBtn />
-        <NewAccountBtn />
+      <ConnectionBtn />
+      <NewAccountBtn />
     </nav>
   )
 }

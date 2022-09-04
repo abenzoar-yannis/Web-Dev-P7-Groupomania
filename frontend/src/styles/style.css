@@ -28,7 +28,7 @@ body {
 .App {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(-6deg, #FD2D01, #FFD7D7, #FFF, #FFD7D7, #FD2D01);
+  background: linear-gradient(-6deg, #fd2d01, #ffd7d7, #fff, #ffd7d7, #fd2d01);
 }
 
 /* Landing Page CSS
@@ -46,7 +46,7 @@ body {
 .landing-page-header h1 {
   padding: 1rem;
   font-size: 3rem;
-  color: #FFD7D7;
+  color: #ffd7d7;
   text-align: center;
 }
 
@@ -65,7 +65,7 @@ main {
   width: 350px;
   margin: 40px 0 0;
   padding: 1rem 1rem 2rem;
-  background: #FFF;
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -74,7 +74,7 @@ main {
   height: 3rem;
   width: 100%;
   text-align: center;
-  color: #FD2D01;
+  color: #fd2d01;
   font-size: 2rem;
 }
 
@@ -89,21 +89,21 @@ main {
   display: flex;
   justify-content: center;
   margin: 0 0 0.5rem;
-  color: #FD2D01;
+  color: #fd2d01;
 }
 
 .form-input-block input {
   height: 3rem;
   width: 100%;
   padding: 0 1rem;
-  border: 2px solid #AAA;
+  border: 2px solid #aaa;
   border-radius: 0.5rem;
   box-shadow: none;
 }
 
 .form-input-block input:focus {
   outline: none;
-  border-color: #FD2D01;
+  border-color: #fd2d01;
 }
 
 .btn-submit {
@@ -113,7 +113,7 @@ main {
   margin: 0 0 1rem;
   border: none;
   border-radius: 0.5rem;
-  background: #FFD7D7;
+  background: #ffd7d7;
   font-weight: bold;
 }
 
@@ -123,7 +123,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border-top: 2px solid #AAA;
+  border-top: 2px solid #aaa;
 }
 
 .btn-nav {
@@ -134,8 +134,8 @@ main {
   padding: 0 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  color: #FFF;
-  background: #FD2D01;
+  color: #fff;
+  background: #fd2d01;
   font-weight: bold;
 }
 
@@ -154,7 +154,7 @@ main {
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   text-align: center;
-  background-color: #FD2D01;
+  background-color: #fd2d01;
 }
 
 /*# sourceMappingURL=style.css.map */

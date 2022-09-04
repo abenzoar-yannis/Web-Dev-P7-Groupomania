@@ -11,6 +11,7 @@ const app = express();
 
 /* --- IMPORT ROUTES --- */
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 
 /* --- MIDDLEWARE --- */
 app.use(express.json());
@@ -41,7 +42,9 @@ app.use((req, res, next) => {
 });
 
 /* --- ROUTES PARAMETRE --- */
+/* Paramétrage des chemins pour les routes */
 app.use("/api/auth", userRoutes);
+app.use("/api/post", postRoutes);
 
 /* EXPORT de l'application */
 module.exports = app;

@@ -1,103 +1,103 @@
 /* Block Connection CSS
 ./sass/components/block-connection.scss */
 .login-block {
-    width: 350px;
+  width: 350px;
 
-    margin: 40px 0 0;
-    padding: 1rem 1rem 2rem;
+  margin: 40px 0 0;
+  padding: 1rem 1rem 2rem;
 
-    background: #FFF;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login-block h2 {
-    height: 3rem;
-    width: 100%;
-    text-align: center;
+  height: 3rem;
+  width: 100%;
+  text-align: center;
 
-    color: #FD2D01;
-    font-size: 2rem;
+  color: #fd2d01;
+  font-size: 2rem;
 }
 
 .form-input-block {
-    position: relative;
-    width: 100%;
-    margin: 0 0 1rem;
+  position: relative;
+  width: 100%;
+  margin: 0 0 1rem;
 }
 .form-input-block label {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
-    margin: 0 0 0.5rem;
+  margin: 0 0 0.5rem;
 
-    color: #FD2D01;
+  color: #fd2d01;
 }
 .form-input-block input {
-    height: 3rem;
-    width: 100%;
-    padding: 0 1rem;
+  height: 3rem;
+  width: 100%;
+  padding: 0 1rem;
 
-    border: 2px solid #AAA;
-    border-radius: 0.5rem;
-    box-shadow: none;
+  border: 2px solid #aaa;
+  border-radius: 0.5rem;
+  box-shadow: none;
 }
 .form-input-block input:focus {
-    outline: none; 
-    border-color: #FD2D01;
+  outline: none;
+  border-color: #fd2d01;
 }
 
 .btn-submit {
-    height: 3rem;
-    width: 100%;
-    padding: 0 1rem;
-    margin: 0 0 1rem;
+  height: 3rem;
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 0 1rem;
 
-    border: none;
-    border-radius: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
 
-    background: #FFD7D7;
-    font-weight: bold;
+  background: #ffd7d7;
+  font-weight: bold;
 }
 
 .login-block-nav {
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    border-top: 2px solid #AAA;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  border-top: 2px solid #aaa;
 }
 
 .btn-nav {
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
 
-    color: #FFF;
-    background: #FD2D01;
-    font-weight: bold;
+  color: #fff;
+  background: #fd2d01;
+  font-weight: bold;
 }
 
 .is-new-account {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    background-color: #14be14;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: #14be14;
 }
 .error-message {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    background-color: #FD2D01;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: #fd2d01;
 }

@@ -1,7 +1,7 @@
 /* Variable of Colors and Size */
-$color-primary: #FD2D01;
-$color-secondary: #FFD7D7;
-$color-tertiary: #4E5166;
+$color-primary: #fd2d01;
+$color-secondary: #ffd7d7;
+$color-tertiary: #4e5166;
 
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
@@ -9,35 +9,35 @@ $color-tertiary: #4E5166;
 /* Mes Mixins */
 /* --- Display flex Mixins --- */
 @mixin display-flex-content-center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 @mixin display-flex-align-center {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 @mixin display-flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 @mixin display-flex-center-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @mixin display-flex-column-align-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 @mixin display-flex-column-content-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @mixin display-flex-column-center-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

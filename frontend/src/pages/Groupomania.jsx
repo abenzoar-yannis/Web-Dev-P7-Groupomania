@@ -1,8 +1,5 @@
-
 const Groupomania = () => {
-  return (
-    <div>Groupomania</div>
-  )
-}
+  return <div>Groupomania</div>;
+};
 
-export default Groupomania
+export default Groupomania;
