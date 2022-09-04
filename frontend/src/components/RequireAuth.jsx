@@ -5,11 +5,13 @@ const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth();
   //   const location = useLocation();
 
-  return auth.role.find((role) => allowedRoles?.includes(role)) ? (
+  return allowedRoles.find((role) => allowedRoles.includes(auth.role)) ? (
     <Outlet />
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/signup" />
   );
 };
 
 export default RequireAuth;
+
+// auth.role === allowedRoles[0] || auth.role === allowedRoles[1]

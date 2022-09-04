@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const Groupomania = () => {
@@ -13,9 +13,10 @@ const Groupomania = () => {
 
       {auth.role === "admin" ? (
         <nav>
-          <Link to="/admin">Admin Page</Link>
+          <Link to="/groupomania/admin">Admin Page</Link>
         </nav>
       ) : null}
+      <Outlet />
     </div>
   );
 };

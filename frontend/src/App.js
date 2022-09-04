@@ -68,18 +68,16 @@ const App = () => {
 
     try {
       const response = await axios.post(`${authURL}/login`, infoLogin);
-      console.log(response.data);
       const userId = response.data.userId;
-      const accessToken = response.data.token;
       const role = response.data.role;
+      const accessToken = response.data.token;
+      const userAuthLinea = { userId, role, accessToken };
       await setAuth({ userId, role, accessToken });
-      const dataId = response.data;
-      const JSONdataId = JSON.stringify(dataId);
+      const userAuthJSON = JSON.stringify(userAuthLinea);
       /* Je met pour l'instant l'ID et le TOKEN en localStorage (Où alors ? un state ?) */
-      localStorage.setItem("groupomaniaId", JSONdataId);
+      sessionStorage.setItem("groupomaniaId", userAuthJSON);
       setEmail("");
       setPassword("");
-      navigate("/groupomania");
     } catch (err) {
       if (err.response) {
         setLoginErrorMessage(err.response.data.message);
