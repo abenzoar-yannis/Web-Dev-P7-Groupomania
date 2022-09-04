@@ -1,19 +1,59 @@
+import { useContext } from "react";
 import ConnectionBtn from "./ConnectionBtn";
+import DataContext from "../context/DataContext";
+import axios from "axios";
+import { ImCross } from "react-icons/im";
 
-const Signup = ({
-  newEmail,
-  setNewEmail,
-  newPassword,
-  setNewPassword,
-  createNewAccount,
-  signupErrorMessage
-}) => {
+const Signup = () => {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    authURL,
+    setSuccesMessage,
+    errorMessage,
+    setErrorMessage,
+    navigate
+  } = useContext(DataContext);
+
+  /* create a new account function */
+  const createNewAccount = async (e) => {
+    e.preventDefault();
+
+    const newAccount = { email: email, password: password };
+
+    try {
+      const response = await axios.post(`${authURL}/signup`, newAccount);
+      setSuccesMessage(response.data.message);
+      setErrorMessage("");
+      setPassword("");
+      navigate("/login");
+    } catch (err) {
+      if (
+        err.response.data.error.errors.email.kind === "unique" &&
+        err.response.data.error.errors.email.path === "email"
+      ) {
+        setErrorMessage("Cette adresse email dispose déjà d'un compte .");
+      } else if (err.response) {
+        console.log(err.response.data);
+        console.log(err.response.status);
+        console.log(err.response.headers);
+      } else {
+        console.log(`Error: ${err.message}`);
+      }
+    }
+  };
+
   return (
     <>
       <h2>Créer votre compte</h2>
 
-      {signupErrorMessage ? (
-        <p className="error-message">{signupErrorMessage}</p>
+      {errorMessage ? (
+        <p className="error-message">
+          <ImCross />
+          {errorMessage}
+        </p>
       ) : null}
 
       <form onSubmit={createNewAccount}>
@@ -26,8 +66,8 @@ const Signup = ({
             name="email"
             id="email"
             placeholder="Adresse email"
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-input-block">
@@ -39,8 +79,8 @@ const Signup = ({
             name="password"
             id="password"
             placeholder="Mot de passe"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button className="btn-submit" type="submit">

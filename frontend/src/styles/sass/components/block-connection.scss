@@ -85,19 +85,27 @@
   font-weight: bold;
 }
 
-.is-new-account {
+.succes-message {
+  height: 3rem;
   width: 100%;
-  padding: 0.5rem;
+  @include display-flex-center-center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  text-align: center;
   background-color: #14be14;
 }
+.succes-message svg {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
 .error-message {
+  height: 3rem;
   width: 100%;
-  padding: 0.5rem;
+  @include display-flex-center-center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  text-align: center;
   background-color: #fd2d01;
+}
+.error-message svg {
+  font-size: 2rem;
+  margin-right: 1rem;
 }
