@@ -7,7 +7,15 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Nav from "./components/Nav";
 import Groupomania from "./pages/Groupomania";
+import Admin from "./components/Admin";
 import axios from "axios";
+import RequireAuth from "./components/RequireAuth";
+import useAuth from "./hooks/useAuth";
+
+const ROLES = {
+  User: "user",
+  Admin: "admin"
+};
 
 const App = () => {
   const [newEmail, setNewEmail] = useState("");
@@ -19,6 +27,7 @@ const App = () => {
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const navigate = useNavigate();
   const authURL = "http://localhost:3000/api/auth";
+  const { setAuth } = useAuth();
 
   /* create a new account function */
   const createNewAccount = async (e) => {
@@ -59,9 +68,14 @@ const App = () => {
 
     try {
       const response = await axios.post(`${authURL}/login`, infoLogin);
+      console.log(response.data);
+      const userId = response.data.userId;
+      const accessToken = response.data.token;
+      const role = response.data.role;
+      await setAuth({ userId, role, accessToken });
       const dataId = response.data;
       const JSONdataId = JSON.stringify(dataId);
-      /* Je met pour l'instant l'ID et le TOKEN en localStorage (Où alors ?) */
+      /* Je met pour l'instant l'ID et le TOKEN en localStorage (Où alors ? un state ?) */
       localStorage.setItem("groupomaniaId", JSONdataId);
       setEmail("");
       setPassword("");
@@ -111,7 +125,16 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="/groupomania" element={<Groupomania />} />
+
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+        >
+          <Route path="/groupomania" element={<Groupomania />}>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path="admin" element={<Admin />} />
+            </Route>
+          </Route>
+        </Route>
       </Routes>
     </div>
   );
