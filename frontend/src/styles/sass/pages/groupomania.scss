@@ -1,0 +1,40 @@
+.groupomania-header {
+  width: 100%;
+  min-height: 10vh;
+
+  border-left: solid 2px $color-tertiary;
+  border-right: solid 2px $color-tertiary;
+  border-bottom: solid 2px $color-tertiary;
+}
+
+.groupomania-header h1 {
+  font-size: 2rem;
+  padding: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+}
+.groupomania-header > div {
+  position: absolute;
+  top: 1vh;
+  margin-left: 1rem;
+}
+
+.groupomania-main {
+  width: 100%;
+  height: 90vh;
+
+  border-left: solid 2px $color-tertiary;
+  border-right: solid 2px $color-tertiary;
+
+  background: #fff;
+}
+
+@media all and (min-width: 600px) {
+  .groupomania-header {
+    max-width: 600px;
+  }
+
+  .groupomania-main {
+    max-width: 600px;
+  }
+}

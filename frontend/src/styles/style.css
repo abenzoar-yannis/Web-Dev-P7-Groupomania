@@ -28,7 +28,16 @@ body {
 .App {
   min-height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: linear-gradient(-6deg, #fd2d01, #ffd7d7, #fff, #ffd7d7, #fd2d01);
+}
+
+h1 {
+  padding: 1rem;
+  text-align: center;
+  font-size: 3rem;
 }
 
 /* Landing Page CSS
@@ -43,22 +52,52 @@ body {
   align-items: center;
 }
 
-.landing-page-header h1 {
-  padding: 1rem;
-  font-size: 3rem;
-  color: #ffd7d7;
-  text-align: center;
-}
-
 .landing-page-header p {
   font-size: 1.5rem;
 }
 
-main {
+.landing-page-main {
   display: flex;
   justify-content: center;
 }
 
+.groupomania-header {
+  width: 100%;
+  min-height: 10vh;
+  border-left: solid 2px #4e5166;
+  border-right: solid 2px #4e5166;
+  border-bottom: solid 2px #4e5166;
+}
+
+.groupomania-header h1 {
+  font-size: 2rem;
+  padding: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.groupomania-header > div {
+  position: absolute;
+  top: 1vh;
+  margin-left: 1rem;
+}
+
+.groupomania-main {
+  width: 100%;
+  height: 90vh;
+  border-left: solid 2px #4e5166;
+  border-right: solid 2px #4e5166;
+  background: #fff;
+}
+
+@media all and (min-width: 600px) {
+  .groupomania-header {
+    max-width: 600px;
+  }
+  .groupomania-main {
+    max-width: 600px;
+  }
+}
 /* Block Connection CSS
 ./sass/components/block-connection.scss */
 .login-block {
@@ -169,6 +208,95 @@ main {
 .error-message svg {
   font-size: 2rem;
   margin-right: 1rem;
+}
+
+.feed-header {
+  height: 5%;
+  box-shadow: 0 2px 2px #4e5166;
+  overflow: hidden;
+}
+
+.groupomania-main h2 {
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.feed {
+  height: calc(100% - 115px);
+  padding: 1rem 0.5rem;
+  overflow: scroll;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  box-shadow: inset 0 -2px 1px #4e5166;
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.feed::-webkit-scrollbar-track {
+  background: none; /* color of the tracking area */
+  margin: 0.5rem;
+}
+
+.feed::-webkit-scrollbar-thumb {
+  margin: 4px;
+  background-color: #fd2d01; /* color of the scroll thumb */
+  border-radius: 8px; /* roundness of the scroll thumb */
+  /* border: 3px solid orange; creates padding around scroll thumb */
+}
+
+.post {
+  width: 100%;
+  margin: 1rem 0;
+}
+.post .email {
+  width: 100%;
+  margin: 0.3rem 0;
+}
+.post .date {
+  width: 100%;
+  margin: 0.3rem 0;
+}
+
+.feed-new-post {
+  height: 80px;
+  background-color: #ffd7d7;
+}
+
+.feed-new-post-form {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.feed-new-post-form label {
+  height: 40%;
+  padding: 0.5rem 1rem;
+}
+.feed-new-post-form div {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.feed-new-post-form div input[type=text] {
+  width: 65%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+}
+.feed-new-post-form div button {
+  width: 25%;
+  height: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #fd2d01;
+  box-shadow: 0 0 4px #ffd7d7;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -25,6 +25,7 @@ body {
 .App {
   min-height: 100vh;
   width: 100%;
+  @include display-flex-column-align-center;
   background: linear-gradient(
     -6deg,
     $color-primary,
@@ -33,4 +34,10 @@ body {
     $color-secondary,
     $color-primary
   );
+}
+
+h1 {
+  padding: 1rem;
+  text-align: center;
+  font-size: 3rem;
 }

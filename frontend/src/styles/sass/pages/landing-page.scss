@@ -8,18 +8,10 @@
   @include display-flex-column-center-center;
 }
 
-.landing-page-header h1 {
-  padding: 1rem;
-
-  font-size: 3rem;
-  color: #ffd7d7;
-  text-align: center;
-}
-
 .landing-page-header p {
   font-size: 1.5rem;
 }
 
-main {
+.landing-page-main {
   @include display-flex-content-center;
 }

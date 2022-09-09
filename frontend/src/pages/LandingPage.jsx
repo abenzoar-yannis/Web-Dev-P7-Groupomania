@@ -11,7 +11,7 @@ const LandingPage = () => {
           Rejoignez vos collegues sur votre réseau social d'entreprise.
         </p>
       </header>
-      <main>
+      <main className="landing-page-main">
         <div className="login-block">
           <Outlet />
         </div>
