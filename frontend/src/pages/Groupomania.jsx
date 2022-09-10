@@ -1,23 +1,30 @@
 import { Link, Outlet } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
+import { GrUserAdmin } from "react-icons/gr";
 import useAuth from "../hooks/useAuth";
 
 const Groupomania = () => {
   const { auth } = useAuth();
   return (
-    <div>
-      <h1>Groupomania</h1>
-      <p>
-        Bienvenue {auth.role} n°{auth.userId},<br />
-        avec le token : {auth.accessToken}
-      </p>
+    <>
+      <header className="groupomania-header">
+        <h1>Groupomania</h1>
+        <div>
+          <button>
+            <MdLogout />
+          </button>
+          {auth.role === "admin" ? (
+            <button>
+              <Link to="/groupomania/admin">
+                <GrUserAdmin />
+              </Link>
+            </button>
+          ) : null}
+        </div>
+      </header>
 
-      {auth.role === "admin" ? (
-        <nav>
-          <Link to="/groupomania/admin">Admin Page</Link>
-        </nav>
-      ) : null}
       <Outlet />
-    </div>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Nav from "./components/Nav";
 import Groupomania from "./pages/Groupomania";
+import Thread from "./components/Thread";
 import Admin from "./components/Admin";
 import RequireAuth from "./components/RequireAuth";
 
@@ -26,6 +27,11 @@ const App = () => {
           element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
         >
           <Route path="/groupomania" element={<Groupomania />}>
+            <Route
+              element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+            >
+              <Route index element={<Thread />} />
+            </Route>
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />
             </Route>

@@ -8,9 +8,12 @@ export const DataProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [succesMessage, setSuccesMessage] = useState("");
+
+  const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   const authURL = "http://localhost:3000/api/auth";
+  const postURL = "http://localhost:3000/api/post";
 
   return (
     <DataContext.Provider
@@ -19,11 +22,14 @@ export const DataProvider = ({ children }) => {
         setEmail,
         password,
         setPassword,
+        posts,
+        setPosts,
         errorMessage,
         setErrorMessage,
         succesMessage,
         setSuccesMessage,
         authURL,
+        postURL,
         navigate
       }}
     >
