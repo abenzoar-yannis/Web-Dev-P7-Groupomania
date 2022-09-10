@@ -8,12 +8,21 @@ import Thread from "./components/Thread";
 import Admin from "./components/Admin";
 import RequireAuth from "./components/RequireAuth";
 
-const ROLES = {
-  User: "user",
-  Admin: "admin"
-};
+
+import DataContext from "./context/DataContext";
+import { useEffect, useContext } from "react"
 
 const App = () => {
+
+  const { setAuth, navigate, ROLES } = useContext(DataContext);
+
+  useEffect(() => {
+    const myAuth = JSON.parse(sessionStorage.getItem("groupomaniaId"));
+    setAuth({ userId: myAuth.userId , role: myAuth.role , accessToken: myAuth.accessToken });
+    navigate("/groupomania");
+  }, [setAuth])
+
+
   return (
     <div className="App">
       <Routes>

@@ -1,66 +1,40 @@
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import DataContext from "../context/DataContext";
+import Post from "./Post"
+
 const Feed = () => {
+    const [data, setData] = useState([]);
+    const { posts, postURL } = useContext(DataContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${postURL}`);
+                setData(response.data);
+            } catch (err) {
+                if (err.response) {
+                    setData([]);
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            } 
+        };
+
+        fetchData()
+
+    }, [posts, postURL])
+  
   return (
     <section className="feed">
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
-      <div className="post">
-        <p className="email">abenzoaryannis@email.fr</p>
-        <p className="date">05/09/22 23h06</p>
-        <p className="message">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          expedita suscipit sapiente recusandae cumque non nostrum iusto tempora
-          totam. Velit cumque architecto obcaecati excepturi nemo vero,
-          perferendis necessitatibus voluptas quas?
-        </p>
-      </div>
+
+        {data.map(post => (
+                  <Post key={post._id} post={post} />
+        ))
+        }
     </section>
   );
 };
