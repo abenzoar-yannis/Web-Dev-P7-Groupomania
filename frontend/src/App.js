@@ -17,11 +17,12 @@ const App = () => {
   const { setAuth, navigate, ROLES } = useContext(DataContext);
 
   useEffect(() => {
-    const myAuth = JSON.parse(sessionStorage.getItem("groupomaniaId"));
-    setAuth({ userId: myAuth.userId , role: myAuth.role , accessToken: myAuth.accessToken });
-    navigate("/groupomania");
+    if (sessionStorage.getItem("groupomaniaId")) {
+      const myAuth = JSON.parse(sessionStorage.getItem("groupomaniaId"));
+      setAuth({ userId: myAuth.userId , role: myAuth.role , accessToken: myAuth.accessToken });
+      navigate("/groupomania");
+  }
   }, [setAuth])
-
 
   return (
     <div className="App">

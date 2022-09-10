@@ -9,17 +9,24 @@ export const DataProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [succesMessage, setSuccesMessage] = useState("");
   const [auth, setAuth] = useState({})
+  const [data, setData] = useState([]);
 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   
-const ROLES = {
-  User: "user",
-  Admin: "admin"
-};
+  const ROLES = {
+    User: "user",
+    Admin: "admin"
+  };
 
   const authURL = "http://localhost:3000/api/auth";
   const postURL = "http://localhost:3000/api/post";
+
+  
+  const disconnect = () => {
+    sessionStorage.clear("groupomaniaId")
+    navigate("/")
+  }
 
   return (
     <DataContext.Provider
@@ -39,7 +46,10 @@ const ROLES = {
         authURL,
         postURL,
         ROLES,
-        navigate
+        navigate,
+        disconnect,
+        data,
+        setData
       }}
     >
       {children}
