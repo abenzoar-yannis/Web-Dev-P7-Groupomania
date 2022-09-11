@@ -40,6 +40,10 @@ h1 {
   font-size: 3rem;
 }
 
+button {
+  padding: 0.5rem;
+}
+
 /* Landing Page CSS
 ./sass/pages/landing-page.scss */
 /* Header */
@@ -259,6 +263,19 @@ h1 {
 .post .date {
   width: 100%;
   margin: 0.3rem 0;
+}
+.post .post-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(#fff, #ffd7d7);
+}
+.post .post-footer button {
+  padding: 0.5rem;
+}
+.post .post-footer button:hover {
+  cursor: pointer;
+  background: #ffbebe;
 }
 
 .feed-new-post {
