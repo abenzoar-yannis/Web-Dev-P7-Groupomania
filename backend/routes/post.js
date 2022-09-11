@@ -11,14 +11,19 @@ const postCtrl = require("../controllers/post");
 const auth = require("../middleware/auth");
 
 /* --- Logique des ROUTES --- */
-/* récupérer toutes les posts */
+/* récupérer toutes les posts (authentification requise) */
 router.get("/", auth, postCtrl.getAllPosts);
-/* récupérer une post par son id */
+/* récupérer une post par son id (authentification requise) */
 router.get("/:id", auth, postCtrl.getOnePost);
-/* Création d'un nouveau post */
+/* Création d'un nouveau post (authentification requise) */
 router.post("/", auth, postCtrl.createPost);
-/* supprimer un post */
+/* Modification d'un nouveau post (authentification requise) */
+router.put("/:id", auth, postCtrl.modifyPost);
+/* supprimer un post (authentification requise) */
 router.delete("/:id", auth, postCtrl.deletePost);
+
+/* 'like' et 'dislike' un post (authentification requise) */
+router.put("/:id/like", auth, postCtrl.likeAPost);
 
 /* EXPORT des routes */
 module.exports = router;

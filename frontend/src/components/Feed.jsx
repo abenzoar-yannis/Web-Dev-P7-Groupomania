@@ -32,7 +32,7 @@ const Feed = () => {
   return (
     <section className="feed">
       {data.map((post) => (
-        <Post key={post._id} postId={post._id} post={post} />
+        <Post key={post._id} post={post} />
       ))}
     </section>
   );

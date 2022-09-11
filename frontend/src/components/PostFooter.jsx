@@ -2,7 +2,7 @@ import DataContext from "../context/DataContext";
 import { useContext } from "react";
 import axios from "axios";
 
-const PostFooter = ({ post, postId }) => {
+const PostFooter = ({ post }) => {
   const { posts, setPosts, auth, ROLES, postURL } = useContext(DataContext);
 
   const deleteAPost = async (id) => {
@@ -35,7 +35,7 @@ const PostFooter = ({ post, postId }) => {
         {auth.userId === post.userId ? <button>Modifier</button> : null}
 
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button onClick={() => deleteAPost(postId)}>Supprimer</button>
+          <button onClick={() => deleteAPost(post._id)}>Supprimer</button>
         ) : null}
       </div>
     </div>
