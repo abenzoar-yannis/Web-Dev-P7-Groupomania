@@ -1,5 +1,6 @@
 import DataContext from "../context/DataContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const PostFooter = ({ post }) => {
@@ -32,7 +33,11 @@ const PostFooter = ({ post }) => {
         <button>Dislike</button>
       </div>
       <div>
-        {auth.userId === post.userId ? <button>Modifier</button> : null}
+        {auth.userId === post.userId ? (
+          <button>
+            <Link to={`/groupomania/${post._id}`}>Modifier</Link>
+          </button>
+        ) : null}
 
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
           <button onClick={() => deleteAPost(post._id)}>Supprimer</button>

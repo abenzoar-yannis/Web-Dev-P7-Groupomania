@@ -1,10 +1,12 @@
 import { useEffect, useContext } from "react";
+import { Outlet } from "react-router-dom";
 import axios from "axios";
 import DataContext from "../context/DataContext";
 import Post from "./Post";
 
 const Feed = () => {
-  const { posts, postURL, auth, data, setData } = useContext(DataContext);
+  const { posts, setPosts, postURL, auth, data, setData } =
+    useContext(DataContext);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -15,6 +17,7 @@ const Feed = () => {
           },
         });
         setData(response.data);
+        setPosts(response.data);
       } catch (err) {
         if (err.response) {
           console.log(err.response.data);
@@ -27,13 +30,14 @@ const Feed = () => {
     };
 
     fetchAllPosts("get");
-  }, [posts, setData, postURL, auth.accessToken]);
+  }, [posts, setPosts, setData, postURL, auth.accessToken]);
 
   return (
     <section className="feed">
       {data.map((post) => (
         <Post key={post._id} post={post} />
       ))}
+      <Outlet />
     </section>
   );
 };

@@ -1,0 +1,31 @@
+.edit-form {
+  @include display-flex-column-align-center;
+  border-top: solid 2px $color-tertiary;
+  label {
+    padding: 0.4rem;
+    color: $color-primary;
+    font-weight: bold;
+  }
+  textarea {
+    width: 90%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: $color-secondary;
+  }
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+  }
+  button {
+    border-radius: 0.5rem;
+    background: $color-green;
+  }
+  a {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: $color-red;
+  }
+}
