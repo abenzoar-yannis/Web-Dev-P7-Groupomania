@@ -3,15 +3,18 @@
 
 /* Header */
 .landing-page-header {
-  height: 300px;
+  max-width: 600px;
+  height: 200px;
   padding: 0 2rem;
   @include display-flex-column-center-center;
 }
 
 .landing-page-header p {
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .landing-page-main {
+  padding-bottom: 60px;
   @include display-flex-content-center;
 }

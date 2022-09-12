@@ -14,7 +14,7 @@ const Signup = () => {
     setSuccesMessage,
     errorMessage,
     setErrorMessage,
-    navigate
+    navigate,
   } = useContext(DataContext);
 
   /* create a new account function */
@@ -83,12 +83,12 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="btn-submit" type="submit">
+        <button className="btn submit" type="submit">
           Créer le compte
         </button>
       </form>
 
-      <nav className="login-block-nav">
+      <nav>
         <ConnectionBtn />
       </nav>
     </>

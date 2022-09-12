@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ConnectionBtn = () => {
   return (
-    <Link className="btn-nav" to="/login">
+    <Link className="btn pad1 valid" to="/">
       Vous avez déjà un compte ?
     </Link>
   );

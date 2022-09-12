@@ -31,27 +31,77 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(-6deg, #fd2d01, #ffd7d7, #fff, #ffd7d7, #fd2d01);
+  background: #fff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  color: #fd2d01;
 }
 
 h1 {
   padding: 1rem;
-  text-align: center;
   font-size: 3rem;
+  text-align: center;
+}
+
+h2 {
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+h3,
+h4 {
+  padding: 0.5rem;
+  font-size: 1.5rem;
 }
 
 button {
   padding: 0.5rem;
+  background: #ffd7d7;
 }
 button:hover {
   cursor: pointer;
+}
+
+a {
+  padding: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #ffd7d7;
+  font-weight: 600;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+.submit {
+  height: 3rem;
+  width: 100%;
+  background: #d2ffdf;
+}
+
+.pad1 {
+  padding: 1rem;
+}
+
+.valid {
+  background: #2cff6c;
 }
 
 /* Landing Page CSS
 ./sass/pages/landing-page.scss */
 /* Header */
 .landing-page-header {
-  height: 300px;
+  max-width: 600px;
+  height: 200px;
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
@@ -61,9 +111,11 @@ button:hover {
 
 .landing-page-header p {
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .landing-page-main {
+  padding-bottom: 60px;
   display: flex;
   justify-content: center;
 }
@@ -109,67 +161,60 @@ button:hover {
 ./sass/components/block-connection.scss */
 .login-block {
   width: 350px;
-  margin: 40px 0 0;
-  padding: 1rem 1rem 2rem;
+  margin-top: 40px;
+  padding: 0.5rem 1rem 1rem;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
-
 .login-block h2 {
-  height: 3rem;
+  text-align: center;
+}
+.login-block nav {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid #4e5166;
+}
+.login-block button {
+  margin-bottom: 1rem;
+}
+.login-block a {
   width: 100%;
   text-align: center;
-  color: #fd2d01;
-  font-size: 2rem;
 }
 
 .form-input-block {
-  position: relative;
   width: 100%;
   margin: 0 0 1rem;
 }
-
 .form-input-block label {
-  width: 100%;
   display: flex;
   justify-content: center;
   margin: 0 0 0.5rem;
   color: #fd2d01;
 }
-
 .form-input-block input {
   height: 3rem;
   width: 100%;
   padding: 0 1rem;
-  border: 2px solid #aaa;
+  border: 2px solid #4e5166;
   border-radius: 0.5rem;
   box-shadow: none;
+  font-weight: 600;
+  color: #4e5166;
 }
-
 .form-input-block input:focus {
   outline: none;
   border-color: #fd2d01;
-}
-
-.btn-submit {
-  height: 3rem;
-  width: 100%;
-  padding: 0 1rem;
-  margin: 0 0 1rem;
-  border: none;
-  border-radius: 0.5rem;
   background: #ffd7d7;
-  font-weight: bold;
+  color: #000;
 }
 
-.login-block-nav {
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  border-top: 2px solid #aaa;
+.color-valid {
+  background: #2cff6c;
 }
 
 .btn-nav {
@@ -345,12 +390,12 @@ button:hover {
 }
 .edit-form button {
   border-radius: 0.5rem;
-  background: #23a511;
+  background: #2cff6c;
 }
 .edit-form a {
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background: #ff4800;
+  background: #ff412c;
 }
 
 /*# sourceMappingURL=style.css.map */

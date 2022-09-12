@@ -17,7 +17,7 @@ const Login = () => {
     setSuccesMessage,
     errorMessage,
     setErrorMessage,
-    navigate
+    navigate,
   } = useContext(DataContext);
   const { setAuth } = useAuth();
 
@@ -98,12 +98,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="btn-submit" type="submit">
+        <button className="btn submit" type="submit">
           Se connecter
         </button>
       </form>
 
-      <nav className="login-block-nav">
+      <nav>
         <NewAccountBtn />
       </nav>
     </>
