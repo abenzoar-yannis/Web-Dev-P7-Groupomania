@@ -7,13 +7,13 @@ import { useContext } from "react";
 
 const Groupomania = () => {
   const { auth } = useAuth();
-  const { disconnect } = useContext(DataContext)
+  const { disconnect } = useContext(DataContext);
 
   return (
     <>
       <header className="groupomania-header">
         <h1>Groupomania</h1>
-        <div>
+        <div className="block-disconnect">
           <button onClick={disconnect}>
             <MdLogout />
           </button>
@@ -24,6 +24,10 @@ const Groupomania = () => {
               </Link>
             </button>
           ) : null}
+        </div>
+        <div className="block-userid">
+          <p>{auth.userName}</p>
+          <p>{auth.role}</p>
         </div>
       </header>
 

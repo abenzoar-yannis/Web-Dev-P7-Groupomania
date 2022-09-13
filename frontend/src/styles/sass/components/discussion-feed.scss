@@ -1,21 +1,21 @@
 .feed-header {
   height: 40px;
+  @include display-flex-center-center;
   border-bottom: solid 2px $color-tertiary;
   overflow: hidden;
 }
 
-.groupomania-main h2 {
-  width: 100%;
+.feed-header h2 {
   text-align: center;
-  padding: 0.4rem 0;
-
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: none;
 }
 
 .feed {
   height: calc(100% - 80px - 40px);
-  padding: 1rem 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+
   overflow: scroll;
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
@@ -38,7 +38,7 @@
 
 .post {
   width: 100%;
-  margin: 1rem 0;
+  padding: 1rem 0.5rem 0;
   .email {
     width: 100%;
     margin: 0.3rem 0;
@@ -51,13 +51,12 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(#fff, $color-secondary);
     button {
       padding: 0.5rem;
+      background: transparent;
     }
     button:hover {
       cursor: pointer;
-      background: darken($color-secondary, 5);
     }
   }
 }

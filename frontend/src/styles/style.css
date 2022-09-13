@@ -122,23 +122,46 @@ a {
 
 .groupomania-header {
   width: 100%;
-  min-height: 10vh;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-left: solid 2px #4e5166;
   border-right: solid 2px #4e5166;
   border-bottom: solid 2px #4e5166;
 }
-
 .groupomania-header h1 {
-  font-size: 2rem;
-  padding: 0.5rem;
-  color: #fff;
-  font-weight: bold;
+  padding: none;
 }
 
-.groupomania-header > div {
+.block-disconnect {
   position: absolute;
-  top: 1vh;
-  margin-left: 1rem;
+  top: 0;
+  left: 2px;
+  display: flex;
+  flex-direction: column;
+}
+.block-disconnect * {
+  font-size: 1.5rem;
+}
+.block-disconnect button {
+  padding: 0.1rem;
+  margin: 2px;
+}
+
+.block-userid {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.block-userid * {
+  font-weight: 600;
+}
+.block-userid p {
+  padding-right: 0.5rem;
 }
 
 .groupomania-main {
@@ -146,12 +169,17 @@ a {
   height: 90vh;
   border-left: solid 2px #4e5166;
   border-right: solid 2px #4e5166;
-  background: #fff;
 }
 
 @media all and (min-width: 600px) {
   .groupomania-header {
     max-width: 600px;
+  }
+  .block-disconnect {
+    left: calc(50% - 298px);
+  }
+  .block-userid {
+    right: calc(50% - 298px);
   }
   .groupomania-main {
     max-width: 600px;
@@ -217,19 +245,6 @@ a {
   background: #2cff6c;
 }
 
-.btn-nav {
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.5rem;
-  color: #fff;
-  background: #fd2d01;
-  font-weight: bold;
-}
-
 .succes-message {
   height: 3rem;
   width: 100%;
@@ -238,7 +253,7 @@ a {
   align-items: center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #14be14;
+  background-color: #2cff6c;
 }
 
 .succes-message svg {
@@ -254,7 +269,7 @@ a {
   align-items: center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #fd2d01;
+  background-color: #ff412c;
 }
 
 .error-message svg {
@@ -264,21 +279,22 @@ a {
 
 .feed-header {
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom: solid 2px #4e5166;
   overflow: hidden;
 }
 
-.groupomania-main h2 {
-  width: 100%;
+.feed-header h2 {
   text-align: center;
-  padding: 0.4rem 0;
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: none;
 }
 
 .feed {
   height: calc(100% - 80px - 40px);
-  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
   overflow: scroll;
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
@@ -301,7 +317,7 @@ a {
 
 .post {
   width: 100%;
-  margin: 1rem 0;
+  padding: 1rem 0.5rem 0;
 }
 .post .email {
   width: 100%;
@@ -315,14 +331,13 @@ a {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background: linear-gradient(#fff, #ffd7d7);
 }
 .post .post-footer button {
   padding: 0.5rem;
+  background: transparent;
 }
 .post .post-footer button:hover {
   cursor: pointer;
-  background: #ffbebe;
 }
 
 .feed-new-post {

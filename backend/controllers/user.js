@@ -15,8 +15,9 @@ exports.signup = (req, res, next) => {
     .hash(req.body.password, 10)
     .then((hash) => {
       const user = new User({
+        name: req.body.name,
         email: req.body.email,
-        password: hash
+        password: hash,
       });
       // Enregistrement du mot de passe salé
       user
@@ -48,11 +49,12 @@ exports.login = (req, res, next) => {
               .json({ message: "Email ou mot de passe incorrecte !" });
           }
           res.status(200).json({
+            userName: user.name,
             userId: user._id,
             token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
-              expiresIn: "24h"
+              expiresIn: "24h",
             }),
-            role: user.role
+            role: user.role,
           });
         })
         .catch((error) => res.status(500).json({ error }));

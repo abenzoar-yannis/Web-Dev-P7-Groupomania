@@ -19,6 +19,7 @@ const App = () => {
       const myAuth = JSON.parse(sessionStorage.getItem("groupomaniaId"));
       setAuth({
         userId: myAuth.userId,
+        userName: myAuth.userName,
         role: myAuth.role,
         accessToken: myAuth.accessToken,
       });

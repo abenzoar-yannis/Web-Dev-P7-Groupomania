@@ -1,22 +1,42 @@
 .groupomania-header {
   width: 100%;
-  min-height: 10vh;
-
+  height: 10vh;
+  @include display-flex-center-center;
   border-left: solid 2px $color-tertiary;
   border-right: solid 2px $color-tertiary;
   border-bottom: solid 2px $color-tertiary;
+
+  h1 {
+    padding: none;
+  }
 }
 
-.groupomania-header h1 {
-  font-size: 2rem;
-  padding: 0.5rem;
-  color: #fff;
-  font-weight: bold;
-}
-.groupomania-header > div {
+.block-disconnect {
   position: absolute;
-  top: 1vh;
-  margin-left: 1rem;
+  top: 0;
+  left: 2px;
+  @include display-flex-column;
+  * {
+    font-size: 1.5rem;
+  }
+  button {
+    padding: 0.1rem;
+    margin: 2px;
+  }
+}
+
+.block-userid {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  @include display-flex-column;
+  align-items: flex-end;
+  * {
+    font-weight: 600;
+  }
+  p {
+    padding-right: 0.5rem;
+  }
 }
 
 .groupomania-main {
@@ -25,13 +45,18 @@
 
   border-left: solid 2px $color-tertiary;
   border-right: solid 2px $color-tertiary;
-
-  background: #fff;
 }
 
 @media all and (min-width: 600px) {
   .groupomania-header {
     max-width: 600px;
+  }
+
+  .block-disconnect {
+    left: calc(50% - 298px);
+  }
+  .block-userid {
+    right: calc(50% - 298px);
   }
 
   .groupomania-main {

@@ -30,16 +30,16 @@ exports.createPost = (req, res, next) => {
     ...postObject,
   });
 
+  // Vérification de l'authentification de l'utilisateur avant enregistrement de la nouvelle sauce dans la base de donnée
+  if (post.userId === req.auth.userId) {
+  } else {
+    res.status(401).json({ error: "Création non autorisée !" });
+  }
+
   post
     .save()
     .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
     .catch((error) => res.status(403).json({ error }));
-
-  // Vérification de l'authentification de l'utilisateur avant enregistrement de la nouvelle sauce dans la base de donnée
-  //   if (post.userId === req.auth.userId) {
-  //   } else {
-  //     res.status(401).json({ error: "Création non autorisée !" });
-  //   }
 };
 
 /* supprimer un post */

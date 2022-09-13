@@ -6,6 +6,8 @@ import { ImCross } from "react-icons/im";
 
 const Signup = () => {
   const {
+    name,
+    setName,
     email,
     setEmail,
     password,
@@ -21,14 +23,15 @@ const Signup = () => {
   const createNewAccount = async (e) => {
     e.preventDefault();
 
-    const newAccount = { email: email, password: password };
+    const newAccount = { name: name, email: email, password: password };
 
     try {
       const response = await axios.post(`${authURL}/signup`, newAccount);
       setSuccesMessage(response.data.message);
       setErrorMessage("");
       setPassword("");
-      navigate("/login");
+      setName("");
+      navigate("/");
     } catch (err) {
       if (
         err.response.data.error.errors.email.kind === "unique" &&
@@ -57,6 +60,19 @@ const Signup = () => {
       ) : null}
 
       <form onSubmit={createNewAccount}>
+        <div className="form-input-block">
+          <label htmlFor="name">Votre nom</label>
+          <input
+            autoFocus
+            type="text"
+            required
+            name="name"
+            id="name"
+            placeholder="Votre Nom"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
         <div className="form-input-block">
           <label htmlFor="email">Adresse email</label>
           <input

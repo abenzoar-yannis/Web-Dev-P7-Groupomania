@@ -12,8 +12,11 @@ const NewPost = () => {
     e.preventDefault();
 
     const userId = JSON.parse(sessionStorage.getItem("groupomaniaId")).userId;
+    const userName = JSON.parse(
+      sessionStorage.getItem("groupomaniaId")
+    ).userName;
     const date = format(new Date(), "dd/MM yyyy, h:m:ss");
-    const newPost = { userId, date, message: postMessage };
+    const newPost = { userId, userName, date, message: postMessage };
 
     try {
       const response = await axios.post(`${postURL}`, newPost, {

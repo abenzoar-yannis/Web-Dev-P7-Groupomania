@@ -8,12 +8,13 @@ const mongoose = require("mongoose");
 /* schema de données d'un post */
 const postSchema = mongoose.Schema({
   userId: { type: String, required: true },
+  userName: { type: String, required: true },
   date: { type: String, required: true },
   message: { type: String, required: true, trim: true },
   likes: { type: Number, required: true, default: 0 },
   dislikes: { type: Number, required: true, default: 0 },
   usersLiked: { type: [String], required: true, default: [] },
-  usersDisliked: { type: [String], required: true, default: [] }
+  usersDisliked: { type: [String], required: true, default: [] },
 });
 
 /* EXPORT du schema des données utilisateurs */

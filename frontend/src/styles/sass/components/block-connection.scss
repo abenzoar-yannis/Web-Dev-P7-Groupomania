@@ -62,28 +62,13 @@
   background: $color-valid;
 }
 
-.btn-nav {
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.5rem;
-
-  color: #fff;
-  background: #fd2d01;
-  font-weight: bold;
-}
-
 .succes-message {
   height: 3rem;
   width: 100%;
   @include display-flex-center-center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #14be14;
+  background-color: $color-valid;
 }
 .succes-message svg {
   font-size: 2rem;
@@ -95,7 +80,7 @@
   @include display-flex-center-center;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #fd2d01;
+  background-color: $color-cancel;
 }
 .error-message svg {
   font-size: 2rem;

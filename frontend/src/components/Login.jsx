@@ -32,10 +32,11 @@ const Login = () => {
     try {
       const response = await axios.post(`${authURL}/login`, infoLogin);
       const userId = response.data.userId;
+      const userName = response.data.userName;
       const role = response.data.role;
       const accessToken = response.data.token;
-      const userAuthLinea = { userId, role, accessToken };
-      await setAuth({ userId, role, accessToken });
+      const userAuthLinea = { userId, userName, role, accessToken };
+      await setAuth({ userId, userName, role, accessToken });
       const userAuthJSON = JSON.stringify(userAuthLinea);
       /* Je met pour l'instant l'ID et le TOKEN en sessionStorage (Où alors ? un state ?) */
       sessionStorage.setItem("groupomaniaId", userAuthJSON);
