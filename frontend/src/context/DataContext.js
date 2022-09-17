@@ -11,12 +11,13 @@ export const DataProvider = ({ children }) => {
   const [succesMessage, setSuccesMessage] = useState("");
   const [auth, setAuth] = useState({});
   const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   const ROLES = {
-    User: "user",
+    User: "Employé(e)",
     Admin: "admin",
   };
 
@@ -39,6 +40,8 @@ export const DataProvider = ({ children }) => {
         setPassword,
         posts,
         setPosts,
+        users,
+        setUsers,
         errorMessage,
         setErrorMessage,
         succesMessage,
