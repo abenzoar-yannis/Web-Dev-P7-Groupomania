@@ -13,6 +13,10 @@ const router = express.Router();
 router.post("/signup", userCtrl.signup);
 /* Connexion de l'utilisateur */
 router.post("/login", userCtrl.login);
+/* Récupérer tout les utilisateurs */
+router.get("/users", userCtrl.getAllUsers);
+/* Supprimer un utilisateur */
+router.delete("/user/:id", userCtrl.deleteUser);
 
 /* EXPORT des routes */
 module.exports = router;

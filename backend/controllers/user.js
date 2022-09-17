@@ -61,3 +61,26 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+/* transmettre tout les users */
+exports.getAllUsers = (req, res, next) => {
+  User.find()
+    .then((users) => res.status(200).json(users))
+    .catch((error) => res.status(404).json({ error }));
+};
+
+/* supprimer un user */
+exports.deleteUser = (req, res, next) => {
+  User.findOne({ _id: req.params.id })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: "Utilisateur non trouvée !" });
+      }
+      User.deleteOne({ _id: req.params.id })
+        .then((user) =>
+          res.status(200).json({ message: "Utilisateur supprimée !" })
+        )
+        .catch((error) => res.status(403).json({ error }));
+    })
+    .catch((error) => res.status(400).json({ error }));
+};

@@ -41,7 +41,7 @@ const NewPost = () => {
   return (
     <section className="feed-new-post">
       <form className="feed-new-post-form" onSubmit={newPostSubmit}>
-        <label htmlFor="message">Ecrire un post</label>
+        <label htmlFor="message">Ecrire un post : </label>
         <div>
           <input
             type="text"

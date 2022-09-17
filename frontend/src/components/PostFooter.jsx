@@ -3,6 +3,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import {
+  FaThumbsDown,
+  FaThumbsUp,
+  FaRegThumbsDown,
+  FaRegThumbsUp,
+} from "react-icons/fa";
+
 const PostFooter = ({ post }) => {
   const { posts, setPosts, auth, ROLES, postURL } = useContext(DataContext);
 
@@ -29,8 +36,14 @@ const PostFooter = ({ post }) => {
   return (
     <div className="post-footer">
       <div>
-        <button>Like</button>
-        <button>Dislike</button>
+        <button>
+          <FaThumbsUp />
+          <FaRegThumbsUp />
+        </button>
+        <button>
+          <FaThumbsDown />
+          <FaRegThumbsDown />
+        </button>
       </div>
       <div>
         {auth.userId === post.userId ? (

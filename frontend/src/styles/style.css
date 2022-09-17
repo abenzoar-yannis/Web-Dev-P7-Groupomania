@@ -319,13 +319,23 @@ a {
   width: 100%;
   padding: 1rem 0.5rem 0;
 }
-.post .email {
-  width: 100%;
-  margin: 0.3rem 0;
+.post .name {
+  width: fit-content;
+  margin: 0.3rem 0 0;
+  background: #ffd7d7;
+  padding: 0.2rem 0.7rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 .post .date {
   width: 100%;
-  margin: 0.3rem 0;
+  margin: 0 0 0.5rem;
+  padding: 0.4rem 0.7rem;
+  background: #ffd7d7;
+  border-top-right-radius: 0.5rem;
+  font-weight: 600;
 }
 .post .post-footer {
   width: 100%;
@@ -355,6 +365,7 @@ a {
 .feed-new-post-form label {
   height: 40%;
   padding: 0.5rem 1rem;
+  font-weight: 600;
 }
 .feed-new-post-form div {
   height: 60%;
@@ -375,8 +386,8 @@ a {
   height: 2rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #fd2d01;
-  box-shadow: 0 0 4px #ffd7d7;
+  background-color: #2cff6c;
+  box-shadow: 2px 2px 3px #4e5166;
 }
 
 .edit-form {
