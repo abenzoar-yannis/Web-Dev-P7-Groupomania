@@ -1,8 +1,16 @@
 .feed-header {
+  position: relative;
   height: 40px;
   @include display-flex-center-center;
   border-bottom: solid 2px $color-tertiary;
   overflow: hidden;
+  nav {
+    position: absolute;
+    left: 0;
+    a {
+      font-weight: 600;
+    }
+  }
 }
 
 .feed-header h2 {

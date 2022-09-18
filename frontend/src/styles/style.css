@@ -278,12 +278,20 @@ a {
 }
 
 .feed-header {
+  position: relative;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: solid 2px #4e5166;
   overflow: hidden;
+}
+.feed-header nav {
+  position: absolute;
+  left: 0;
+}
+.feed-header nav a {
+  font-weight: 600;
 }
 
 .feed-header h2 {

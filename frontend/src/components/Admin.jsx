@@ -1,4 +1,6 @@
 import { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import DataContext from "../context/DataContext";
 
@@ -51,6 +53,11 @@ const Admin = () => {
   return (
     <main className="groupomania-main">
       <section className="feed-header">
+        <nav>
+          <Link to="/groupomania">
+            <FaArrowLeft /> Retour
+          </Link>
+        </nav>
         <h2>Administration</h2>
       </section>
 
