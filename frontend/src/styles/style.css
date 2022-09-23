@@ -96,6 +96,12 @@ a {
   background: #2cff6c;
 }
 
+textarea {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
 /* Landing Page CSS
 ./sass/pages/landing-page.scss */
 /* Header */
@@ -300,7 +306,7 @@ a {
 }
 
 .feed {
-  height: calc(100% - 80px - 40px);
+  height: calc(100% - 140px - 40px);
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -359,7 +365,7 @@ a {
 }
 
 .feed-new-post {
-  height: 80px;
+  height: 140px;
   background-color: #ffd7d7;
   border-top: solid 2px #4e5166;
 }
@@ -398,38 +404,47 @@ a {
   box-shadow: 2px 2px 3px #4e5166;
 }
 
-.edit-form {
+.feed-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-top: solid 2px #4e5166;
+  height: 100%;
 }
-.edit-form label {
+.feed-form label {
   padding: 0.4rem;
   color: #fd2d01;
   font-weight: bold;
 }
-.edit-form textarea {
-  width: 90%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  background: #ffd7d7;
+.feed-form textarea {
+  height: 100%;
+  width: 80%;
 }
-.edit-form div {
+.feed-form > div {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 1rem;
+  padding: 0 1rem 0.5rem;
 }
-.edit-form button {
+.feed-form > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 20%;
+  padding: 0.3rem;
+}
+.feed-form button {
   border-radius: 0.5rem;
   background: #2cff6c;
+  font-weight: 600;
 }
-.edit-form a {
+.feed-form a {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background: #ff412c;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -15,12 +15,12 @@ const Groupomania = () => {
         <h1>Groupomania</h1>
         <div className="block-disconnect">
           <button onClick={disconnect}>
-            <MdLogout />
+            <MdLogout /> Déconnexion
           </button>
           {auth.role === "admin" ? (
             <button>
               <Link to="/groupomania/admin">
-                <GrUserAdmin />
+                <GrUserAdmin /> Administration
               </Link>
             </button>
           ) : null}

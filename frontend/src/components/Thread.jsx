@@ -1,5 +1,5 @@
 import Feed from "./Feed";
-import NewPost from "./NewPost";
+import { Outlet } from "react-router-dom";
 
 const Thread = () => {
   return (
@@ -9,7 +9,7 @@ const Thread = () => {
       </section>
 
       <Feed />
-      <NewPost />
+      <Outlet />
     </main>
   );
 };

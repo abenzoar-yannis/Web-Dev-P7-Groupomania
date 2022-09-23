@@ -37,7 +37,6 @@ const Feed = () => {
       {data.map((post) => (
         <Post key={post._id} post={post} />
       ))}
-      <Outlet />
     </section>
   );
 };

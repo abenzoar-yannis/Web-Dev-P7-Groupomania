@@ -6,6 +6,9 @@ import useAuth from "../hooks/useAuth";
 import { ImCross } from "react-icons/im";
 import { BiCheckCircle } from "react-icons/bi";
 
+import axiosError from "../utils/axiosError";
+import authentification from "../utils/authentification";
+
 const Login = () => {
   const {
     email,
@@ -31,26 +34,20 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${authURL}/login`, infoLogin);
-      const userId = response.data.userId;
-      const userName = response.data.userName;
-      const role = response.data.role;
-      const accessToken = response.data.token;
-      const userAuthLinea = { userId, userName, role, accessToken };
-      await setAuth({ userId, userName, role, accessToken });
-      const userAuthJSON = JSON.stringify(userAuthLinea);
-      /* Je met pour l'instant l'ID et le TOKEN en sessionStorage (Où alors ? un state ?) */
-      sessionStorage.setItem("groupomaniaId", userAuthJSON);
+      const userAuthLinea = authentification(response);
+      await setAuth({
+        userId: userAuthLinea.userId,
+        userName: userAuthLinea.userName,
+        role: userAuthLinea.role,
+        accessToken: userAuthLinea.accessToken,
+      });
       setEmail("");
       setPassword("");
       navigate("/groupomania");
     } catch (err) {
       if (err.response) {
         setErrorMessage(err.response.data.message);
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
+        axiosError(err);
       }
     }
   };
@@ -72,7 +69,7 @@ const Login = () => {
         </p>
       ) : null}
 
-      <form onSubmit={accountConnexion}>
+      <form onSubmit={(e) => accountConnexion(e)}>
         <div className="form-input-block">
           <label htmlFor="email">Adresse email</label>
           <input

@@ -10,6 +10,7 @@ import RequireAuth from "./components/RequireAuth";
 
 import DataContext from "./context/DataContext";
 import { useEffect, useContext } from "react";
+import NewPost from "./components/NewPost";
 
 const App = () => {
   const { setAuth, navigate, ROLES } = useContext(DataContext);
@@ -24,7 +25,7 @@ const App = () => {
         accessToken: myAuth.accessToken,
       });
       navigate("/groupomania");
-    }
+    } else navigate("/");
   }, [setAuth]);
 
   return (
@@ -43,9 +44,10 @@ const App = () => {
             <Route
               element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
             >
-              <Route index element={<Thread />} />
-
-              <Route path=":id" element={<PostUpdate />} />
+              <Route element={<Thread />}>
+                <Route index element={<NewPost />} />
+                <Route path=":id" element={<PostUpdate />} />
+              </Route>
             </Route>
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />

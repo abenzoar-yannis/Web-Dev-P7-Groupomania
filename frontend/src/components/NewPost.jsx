@@ -8,9 +8,7 @@ const NewPost = () => {
   const [postMessage, setPostMessage] = useState("");
   const { posts, setPosts, auth, postURL } = useContext(DataContext);
 
-  const newPostSubmit = async (e) => {
-    e.preventDefault();
-
+  const newPostSubmit = async () => {
     const userId = JSON.parse(sessionStorage.getItem("groupomaniaId")).userId;
     const userName = JSON.parse(
       sessionStorage.getItem("groupomaniaId")
@@ -40,18 +38,17 @@ const NewPost = () => {
 
   return (
     <section className="feed-new-post">
-      <form className="feed-new-post-form" onSubmit={newPostSubmit}>
+      <form className="feed-form" onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="message">Ecrire un post : </label>
         <div>
-          <input
-            type="text"
+          <textarea
             id="message"
             required
             value={postMessage}
             onChange={(e) => setPostMessage(e.target.value)}
           />
-          <button type="submit">
-            <FiSend />
+          <button type="submit" onClick={newPostSubmit}>
+            <FiSend /> Envoyer
           </button>
         </div>
       </form>

@@ -10,8 +10,8 @@ const PostUpdate = () => {
   const [editMessage, setEditMessage] = useState("");
 
   useEffect(() => {
-    if (post) setEditMessage(post.message);
-  }, [post, setEditMessage]);
+    setEditMessage(post.message);
+  }, []);
 
   const editPost = async (id) => {
     const updatedPost = { message: editMessage };
@@ -38,25 +38,27 @@ const PostUpdate = () => {
   };
 
   return (
-    <main className="groupomania-main">
+    <section className="feed-new-post">
       {editMessage && (
         <>
-          <h2>Editeur de message</h2>
-          <form className="edit-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="feed-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="message">Message à éditer :</label>
-            <textarea
-              id="message"
-              required
-              value={editMessage}
-              onChange={(e) => setEditMessage(e.target.value)}
-            />
             <div>
-              <button type="submit" onClick={() => editPost(post._id)}>
-                Modifier
-              </button>
-              <p>
-                <Link to="/groupomania">Annuler</Link>
-              </p>
+              <textarea
+                id="message"
+                required
+                value={editMessage}
+                onChange={(e) => setEditMessage(e.target.value)}
+              />
+              {/* setEditMessage(e.target.value) */}
+              <div>
+                <button type="submit" onClick={() => editPost(post._id)}>
+                  Modifier
+                </button>
+                <p>
+                  <Link to="/groupomania">Annuler</Link>
+                </p>
+              </div>
             </div>
           </form>
         </>
@@ -70,7 +72,7 @@ const PostUpdate = () => {
           </p>
         </>
       )}
-    </main>
+    </section>
   );
 };
 

@@ -46,7 +46,7 @@ const PostFooter = ({ post }) => {
         </button>
       </div>
       <div>
-        {auth.userId === post.userId ? (
+        {auth.role === ROLES.Admin || auth.userId === post.userId ? (
           <button>
             <Link to={`/groupomania/${post._id}`}>Modifier</Link>
           </button>

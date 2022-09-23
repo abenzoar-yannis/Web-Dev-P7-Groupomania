@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ConnectionBtn from "./ConnectionBtn";
 import DataContext from "../context/DataContext";
-import axios from "axios";
 import { ImCross } from "react-icons/im";
+
+import createNewAccount from "../utils/fetchAuthFunctions";
 
 const Signup = () => {
   const {
@@ -17,36 +18,29 @@ const Signup = () => {
     errorMessage,
     setErrorMessage,
     navigate,
+    regexEmail,
+    emailValidity,
+    setEmailValidity,
+    passwordValidity,
+    setPasswordValidity,
+    regexPassword,
   } = useContext(DataContext);
 
-  /* create a new account function */
-  const createNewAccount = async (e) => {
-    e.preventDefault();
-
-    const newAccount = { name: name, email: email, password: password };
-
-    try {
-      const response = await axios.post(`${authURL}/signup`, newAccount);
-      setSuccesMessage(response.data.message);
-      setErrorMessage("");
-      setPassword("");
-      setName("");
-      navigate("/");
-    } catch (err) {
-      if (
-        err.response.data.error.errors.email.kind === "unique" &&
-        err.response.data.error.errors.email.path === "email"
-      ) {
-        setErrorMessage("Cette adresse email dispose déjà d'un compte .");
-      } else if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
+  useEffect(() => {
+    if (regexEmail.test(email)) {
+      setEmailValidity(true);
+    } else {
+      setEmailValidity(false);
     }
-  };
+  }, [email, regexEmail, setEmailValidity]);
+
+  useEffect(() => {
+    if (regexPassword.test(password)) {
+      setPasswordValidity(true);
+    } else {
+      setPasswordValidity(false);
+    }
+  }, [password, regexPassword, setPasswordValidity]);
 
   return (
     <>
@@ -59,7 +53,7 @@ const Signup = () => {
         </p>
       ) : null}
 
-      <form onSubmit={createNewAccount}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div className="form-input-block">
           <label htmlFor="name">Votre nom</label>
           <input
@@ -85,6 +79,12 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {!emailValidity ? (
+            <p>
+              Respecter l'exemple suivant :<br />
+              votremail@mail.com
+            </p>
+          ) : null}
         </div>
         <div className="form-input-block">
           <label htmlFor="password">Mot de passe</label>
@@ -98,8 +98,34 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {!passwordValidity ? (
+            <ul>
+              <li>- 8 caractères minimum</li>
+              <li>- Lettre minuscule</li>
+              <li>- Lettre majuscule</li>
+              <li>- Chiffre</li>
+              <li>- Caractère spécial</li>
+            </ul>
+          ) : null}
         </div>
-        <button className="btn submit" type="submit">
+        <button
+          className="btn submit"
+          type="submit"
+          onClick={(e) =>
+            createNewAccount(
+              e,
+              name,
+              setName,
+              email,
+              password,
+              setPassword,
+              authURL,
+              setSuccesMessage,
+              setErrorMessage,
+              navigate
+            )
+          }
+        >
           Créer le compte
         </button>
       </form>

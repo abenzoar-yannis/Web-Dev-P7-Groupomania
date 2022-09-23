@@ -1,21 +1,35 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// require("dotenv").config({ path: "../../.env" });
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("votremail@mail.com");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [succesMessage, setSuccesMessage] = useState("");
   const [auth, setAuth] = useState({});
   const [data, setData] = useState([]);
   const [users, setUsers] = useState([]);
+  const [emailValidity, setEmailValidity] = useState(true);
+  const [passwordValidity, setPasswordValidity] = useState(true);
 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
+  const regexEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z0-9]{2,3}$");
+  const regexPassword = new RegExp(
+    "(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,10}"
+  );
+  // const ROLES = {
+  //   User: process.env.USER,
+  //   Admin: process.env.ADMIN,
+  // };
+
+  // const authURL = process.env.AUTHURL;
+  // const postURL = process.env.POSTURL;
   const ROLES = {
     User: "Employé(e)",
     Admin: "admin",
@@ -55,6 +69,12 @@ export const DataProvider = ({ children }) => {
         disconnect,
         data,
         setData,
+        regexEmail,
+        emailValidity,
+        setEmailValidity,
+        regexPassword,
+        passwordValidity,
+        setPasswordValidity,
       }}
     >
       {children}
