@@ -1,0 +1,38 @@
+.main-title {
+  height: 60%;
+  width: 100%;
+  @include display-flex-center-center;
+}
+
+.header-bottom {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.block-userid {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  * {
+    font-weight: 600;
+  }
+  p {
+    padding-left: 0.5rem;
+  }
+}
+
+.block-navigation {
+  display: flex;
+  align-items: flex-end;
+  button {
+    display: flex;
+    align-items: center;
+
+    margin: 0.1rem 0.5rem;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+}

@@ -1,7 +1,7 @@
 import Feed from "./Feed";
 import { Outlet } from "react-router-dom";
 
-const Thread = () => {
+const DiscussionFeed = () => {
   return (
     <main className="groupomania-main">
       <section className="feed-header">
@@ -14,4 +14,4 @@ const Thread = () => {
   );
 };
 
-export default Thread;
+export default DiscussionFeed;

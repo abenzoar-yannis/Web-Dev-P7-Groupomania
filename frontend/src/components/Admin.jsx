@@ -1,6 +1,4 @@
 import { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
 import DataContext from "../context/DataContext";
 
@@ -52,26 +50,36 @@ const Admin = () => {
 
   return (
     <main className="groupomania-main">
-      <section className="feed-header">
-        <nav>
-          <Link to="/groupomania">
-            <FaArrowLeft /> Retour
-          </Link>
-        </nav>
+      <section className="administration-header">
         <h2>Administration</h2>
       </section>
 
-      <section className="feed">
-        {users.map((user) => (
-          <div key={user._id}>
-            <p>{user._id}</p>
-            <p>{user.name}</p>
-            <p>{user.role}</p>
-            <div className="post-footer">
-              <button onClick={() => deleteAUser(user._id)}>Supprimer</button>
-            </div>
-          </div>
-        ))}
+      <section className="administration-feed">
+        <table>
+          <thead>
+            <tr>
+              <th colSpan={3}>Utilisateurs</th>
+            </tr>
+            <tr>
+              <td className="name-column">Nom</td>
+              <td className="role-column">Rôle</td>
+              <td className="empty-column"></td>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td className="name-column">{user.name}</td>
+                <td className="role-column">{user.role}</td>
+                <td className="empty-column">
+                  <button onClick={() => deleteAUser(user._id)}>
+                    Supprimer
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
     </main>
   );

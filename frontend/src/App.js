@@ -3,7 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Groupomania from "./pages/Groupomania";
-import Thread from "./components/Thread";
+import DiscussionFeed from "./components/DiscussionFeed";
 import Admin from "./components/Admin";
 import PostUpdate from "./components/PostUpdate";
 import RequireAuth from "./components/RequireAuth";
@@ -44,7 +44,7 @@ const App = () => {
             <Route
               element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
             >
-              <Route element={<Thread />}>
+              <Route element={<DiscussionFeed />}>
                 <Route index element={<NewPost />} />
                 <Route path=":id" element={<PostUpdate />} />
               </Route>

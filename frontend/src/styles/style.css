@@ -1,7 +1,9 @@
+@charset "UTF-8";
 /* Variable of Colors and Size */
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 /* Mes Mixins */
+/* Gére l'overflow des feed et l'apparence des scrollbars */
 /* --- Display flex Mixins --- */
 /* General property and default property override.
 ./sass/base/base_styles.scss */
@@ -43,20 +45,18 @@ h4 {
 }
 
 h1 {
-  padding: 1rem;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
 }
 
 h2 {
-  padding: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 h3,
 h4 {
   padding: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 button {
@@ -65,10 +65,6 @@ button {
 }
 button:hover {
   cursor: pointer;
-}
-
-a {
-  padding: 0.5rem;
 }
 
 .btn {
@@ -126,48 +122,140 @@ textarea {
   justify-content: center;
 }
 
-.groupomania-header {
+.main-title {
+  height: 60%;
   width: 100%;
-  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: solid 2px #4e5166;
-  border-right: solid 2px #4e5166;
-  border-bottom: solid 2px #4e5166;
-}
-.groupomania-header h1 {
-  padding: none;
 }
 
-.block-disconnect {
-  position: absolute;
-  top: 0;
-  left: 2px;
+.header-bottom {
+  height: 40%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-}
-.block-disconnect * {
-  font-size: 1.5rem;
-}
-.block-disconnect button {
-  padding: 0.1rem;
-  margin: 2px;
+  justify-content: space-between;
 }
 
 .block-userid {
-  position: absolute;
-  top: 0;
-  right: 2px;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
 }
 .block-userid * {
   font-weight: 600;
 }
 .block-userid p {
-  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.block-navigation {
+  display: flex;
+  align-items: flex-end;
+}
+.block-navigation button {
+  display: flex;
+  align-items: center;
+  margin: 0.1rem 0.5rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+}
+
+.administration-header {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 2px #4e5166;
+}
+
+.administration-feed {
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.administration-feed::-webkit-scrollbar {
+  width: 8px;
+}
+.administration-feed::-webkit-scrollbar-track {
+  background: none;
+  margin: 0.5rem;
+}
+.administration-feed::-webkit-scrollbar-thumb {
+  margin: 4px;
+  background-color: #fd2d01;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border: 0.1rem solid #4e5166;
+}
+
+thead {
+  width: 100%;
+}
+thead tr {
+  background: #ffd7d7;
+}
+
+tbody {
+  width: 100%;
+}
+
+th {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+tr {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  border: 0.1rem solid #4e5166;
+}
+
+td {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid #4e5166;
+}
+td button {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #d2ffdf;
+}
+td button:hover {
+  background: #ff412c;
+}
+
+.name-column {
+  width: calc(50% - 50px);
+}
+
+.role-column {
+  width: calc(50% - 50px);
+}
+
+.empty-column {
+  width: 100px;
+}
+
+.groupomania-header {
+  width: 100%;
+  height: 10vh;
+  border-left: solid 2px #4e5166;
+  border-right: solid 2px #4e5166;
+  border-bottom: solid 2px #4e5166;
 }
 
 .groupomania-main {
@@ -181,14 +269,14 @@ textarea {
   .groupomania-header {
     max-width: 600px;
   }
-  .block-disconnect {
+  .groupomania-main {
+    max-width: 600px;
+  }
+  .block-navigation {
     left: calc(50% - 298px);
   }
   .block-userid {
     right: calc(50% - 298px);
-  }
-  .groupomania-main {
-    max-width: 600px;
   }
 }
 /* Block Connection CSS
@@ -284,56 +372,41 @@ textarea {
 }
 
 .feed-header {
-  position: relative;
   height: 40px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: solid 2px #4e5166;
-  overflow: hidden;
-}
-.feed-header nav {
-  position: absolute;
-  left: 0;
-}
-.feed-header nav a {
-  font-weight: 600;
-}
-
-.feed-header h2 {
-  text-align: center;
-  padding: none;
 }
 
 .feed {
   height: calc(100% - 140px - 40px);
   display: flex;
   flex-direction: column;
+  padding: 0.5rem;
   overflow: scroll;
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-x: hidden;
 }
-
 .feed::-webkit-scrollbar {
-  width: 8px; /* width of the entire scrollbar */
+  width: 8px;
 }
-
 .feed::-webkit-scrollbar-track {
-  background: none; /* color of the tracking area */
+  background: none;
   margin: 0.5rem;
 }
-
 .feed::-webkit-scrollbar-thumb {
   margin: 4px;
-  background-color: #fd2d01; /* color of the scroll thumb */
-  border-radius: 8px; /* roundness of the scroll thumb */
-  /* border: 3px solid orange; creates padding around scroll thumb */
+  background-color: #fd2d01;
+  border-radius: 8px;
 }
 
 .post {
   width: 100%;
-  padding: 1rem 0.5rem 0;
+  margin: 1rem 0;
 }
-.post .name {
+
+.name {
   width: fit-content;
   margin: 0.3rem 0 0;
   background: #ffd7d7;
@@ -343,25 +416,48 @@ textarea {
   font-weight: 600;
   font-size: 1.2rem;
 }
-.post .date {
+
+.date {
   width: 100%;
-  margin: 0 0 0.5rem;
   padding: 0.4rem 0.7rem;
   background: #ffd7d7;
   border-top-right-radius: 0.5rem;
   font-weight: 600;
 }
-.post .post-footer {
+
+.message {
+  padding: 0.7rem;
+  border-left: 0.2rem solid #ffd7d7;
+  border-right: 0.2rem solid #ffd7d7;
+}
+
+.post-footer {
   width: 100%;
   display: flex;
+  padding-bottom: 0;
+  background: #ffd7d7;
   justify-content: space-between;
+  border-left: 0.2rem solid #ffd7d7;
+  border-right: 0.2rem solid #ffd7d7;
+  border-bottom: 0.2rem solid #ffd7d7;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
 }
-.post .post-footer button {
-  padding: 0.5rem;
-  background: transparent;
-}
-.post .post-footer button:hover {
+.post-footer button:hover {
   cursor: pointer;
+}
+
+.modifie-button {
+  padding: 0;
+}
+.modifie-button a {
+  padding: 0.5rem;
+  background: #2cff6c;
+}
+
+.delete-button {
+  background: #ff412c;
 }
 
 .feed-new-post {

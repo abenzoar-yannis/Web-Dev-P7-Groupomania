@@ -38,20 +38,18 @@ h4 {
 }
 
 h1 {
-  padding: 1rem;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
 }
 
 h2 {
-  padding: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 h3,
 h4 {
   padding: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 button {
@@ -60,10 +58,6 @@ button {
   &:hover {
     cursor: pointer;
   }
-}
-
-a {
-  padding: 0.5rem;
 }
 
 .btn {

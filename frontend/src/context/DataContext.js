@@ -23,18 +23,18 @@ export const DataProvider = ({ children }) => {
   const regexPassword = new RegExp(
     "(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,10}"
   );
+
   // const ROLES = {
   //   User: process.env.USER,
   //   Admin: process.env.ADMIN,
   // };
-
-  // const authURL = process.env.AUTHURL;
-  // const postURL = process.env.POSTURL;
   const ROLES = {
     User: "Employé(e)",
     Admin: "admin",
   };
 
+  // const authURL = process.env.AUTHURL;
+  // const postURL = process.env.POSTURL;
   const authURL = "http://localhost:3000/api/auth";
   const postURL = "http://localhost:3000/api/post";
 

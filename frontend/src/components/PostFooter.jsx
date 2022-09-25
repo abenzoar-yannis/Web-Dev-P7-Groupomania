@@ -1,7 +1,7 @@
-import DataContext from "../context/DataContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import DataContext from "../context/DataContext";
 
 import {
   FaThumbsDown,
@@ -47,13 +47,18 @@ const PostFooter = ({ post }) => {
       </div>
       <div>
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button>
+          <button className="modifie-button">
             <Link to={`/groupomania/${post._id}`}>Modifier</Link>
           </button>
         ) : null}
 
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button onClick={() => deleteAPost(post._id)}>Supprimer</button>
+          <button
+            className="delete-button"
+            onClick={() => deleteAPost(post._id)}
+          >
+            Supprimer
+          </button>
         ) : null}
       </div>
     </div>

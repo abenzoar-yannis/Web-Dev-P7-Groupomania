@@ -11,7 +11,7 @@ const PostUpdate = () => {
 
   useEffect(() => {
     setEditMessage(post.message);
-  }, []);
+  }, [post]);
 
   const editPost = async (id) => {
     const updatedPost = { message: editMessage };
