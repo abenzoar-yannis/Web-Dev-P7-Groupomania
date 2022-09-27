@@ -5,7 +5,7 @@ const DiscussionFeed = () => {
   return (
     <main className="groupomania-main">
       <section className="feed-header">
-        <h2>DISCUSSION</h2>
+        <h2>Vos Posts</h2>
       </section>
 
       <Feed />

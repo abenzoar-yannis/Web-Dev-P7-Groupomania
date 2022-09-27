@@ -3,6 +3,8 @@
 /* --- IMPORT --- */
 /* model de post */
 const Post = require("../models/post");
+/* package 'file system' */
+const fs = require("fs");
 
 /* --- CONTROLLERS --- */
 
@@ -28,39 +30,54 @@ exports.createPost = (req, res, next) => {
   const post = new Post({
     // on utlise l'opérateur spread ... pour faire une copie de tous les élements req.body
     ...postObject,
+    // configuration de l'url de l'image
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`,
   });
 
   // Vérification de l'authentification de l'utilisateur avant enregistrement de la nouvelle sauce dans la base de donnée
   if (post.userId === req.auth.userId) {
+    post
+      .save()
+      .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
+      .catch((error) => res.status(403).json({ error }));
   } else {
     res.status(401).json({ error: "Création non autorisée !" });
   }
-
-  post
-    .save()
-    .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
-    .catch((error) => res.status(403).json({ error }));
 };
 
 /* supprimer un post */
 exports.deletePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      if (!post) {
-        return res.status(404).json({ error: "Post non trouvée !" });
-      }
-      Post.deleteOne({ _id: req.params.id })
-        .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
-        .catch((error) => res.status(403).json({ error }));
-    })
-    .catch((error) => res.status(400).json({ error }));
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    if (!post) {
+      return res.status(404).json({ error: "Post non trouvée !" });
+    }
+    if (post.userId !== req.auth.userId) {
+      return res.status(401).json({ error: "Requête non autorisée !" });
+    } else {
+      const filename = sauce.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.deleteOne({ _id: req.params.id })
+          .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
+          .catch((error) => res.status(403).json({ error }));
+      }).catch((error) => res.status(400).json({ error }));
+    }
+  });
 };
 
 /* modification d'un post */
 exports.modifyPost = (req, res, next) => {
   Post.findOne({ _id: req.params.id }).then((post) => {
     // stockage des modification du post
-    const postObject = { ...req.body };
+    const postObject = req.file
+      ? {
+          ...JSON.parse(req.body.post),
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`,
+        }
+      : { ...req.body };
 
     // Vérifi si l'userId du post modifiée est le même que l'userId du post avant modification
     if (postObject.userId && postObject.userId !== post.userId) {
@@ -69,6 +86,19 @@ exports.modifyPost = (req, res, next) => {
 
     if (!post) {
       return res.status(404).json({ error: "Post non trouvée !" });
+    }
+
+    if (req.file) {
+      Post.findOne({ _id: req.params.id })
+        .then((post) => {
+          const filename = post.imageUrl.split("/images/")[1];
+          fs.unlink(`images/${filename}`, (error) => {
+            if (error) {
+              throw new Error(error);
+            }
+          });
+        })
+        .catch((error) => res.status(400).json({ error: error.message }));
     }
 
     // modification du post

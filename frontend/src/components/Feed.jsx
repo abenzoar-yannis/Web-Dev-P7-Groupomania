@@ -13,7 +13,7 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      {data.map((post) => (
+      {data.reverse().map((post) => (
         <Post key={post._id} post={post} />
       ))}
     </section>

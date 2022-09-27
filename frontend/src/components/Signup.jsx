@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
-import ConnectionBtn from "./ConnectionBtn";
 import DataContext from "../context/DataContext";
+import ConnectionBtn from "./ConnectionBtn";
+
 import { ImCross } from "react-icons/im";
 
-import createNewAccount from "../utils/fetchAuthFunctions";
+import createNewAccount from "../utils/createNewAccount";
 
 const Signup = () => {
   const {
@@ -80,10 +81,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           {!emailValidity ? (
-            <p>
-              Respecter l'exemple suivant :<br />
-              votremail@mail.com
-            </p>
+            <p className="input-not-valid">Exemple : votremail@mail.com</p>
           ) : null}
         </div>
         <div className="form-input-block">
@@ -99,7 +97,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {!passwordValidity ? (
-            <ul>
+            <ul className="input-not-valid">
               <li>- 8 caractères minimum</li>
               <li>- Lettre minuscule</li>
               <li>- Lettre majuscule</li>
@@ -122,7 +120,9 @@ const Signup = () => {
               authURL,
               setSuccesMessage,
               setErrorMessage,
-              navigate
+              navigate,
+              emailValidity,
+              passwordValidity
             )
           }
         >

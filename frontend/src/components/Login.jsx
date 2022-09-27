@@ -1,11 +1,12 @@
-import NewAccountBtn from "./NewAccountBtn";
-import DataContext from "../context/DataContext";
-import axios from "axios";
 import { useContext } from "react";
+import DataContext from "../context/DataContext";
+import NewAccountBtn from "./NewAccountBtn";
 import useAuth from "../hooks/useAuth";
-import { ImCross } from "react-icons/im";
-import { BiCheckCircle } from "react-icons/bi";
 
+import { BiCheckCircle } from "react-icons/bi";
+import { ImCross } from "react-icons/im";
+
+import axios from "axios";
 import axiosError from "../utils/axiosError";
 import authentification from "../utils/authentification";
 

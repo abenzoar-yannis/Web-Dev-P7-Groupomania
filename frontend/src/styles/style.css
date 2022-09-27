@@ -335,6 +335,17 @@ td button:hover {
   color: #000;
 }
 
+.input-not-valid {
+  margin-top: 0.2rem;
+  padding: 0.3rem;
+  background: #ffd7d7;
+  border-radius: 0.3rem;
+  color: #ff412c;
+}
+.input-not-valid * {
+  color: #ff412c;
+}
+
 .color-valid {
   background: #2cff6c;
 }

@@ -8,8 +8,9 @@ const fetchAllPosts = async (postURL, auth, setData, setPosts) => {
         authorization: auth.accessToken,
       },
     });
-    setData(response.data);
-    setPosts(response.data);
+    const reverseData = response.data.reverse();
+    setData(reverseData);
+    setPosts(reverseData);
   } catch (err) {
     axiosError(err);
   }

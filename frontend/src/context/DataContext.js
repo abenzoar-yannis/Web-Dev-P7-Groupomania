@@ -6,7 +6,7 @@ const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("votremail@mail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [succesMessage, setSuccesMessage] = useState("");
