@@ -22,9 +22,10 @@ exports.signup = (req, res, next) => {
       // Enregistrement du mot de passe salé
       user
         .save()
-        .then(() =>
-          res.status(201).json({ message: "Votre compte a été créé !" })
-        )
+        .then(() => {
+          res.status(201).json({ message: "Votre compte a été créé !" });
+          console.log("Nouveau compte cree !");
+        })
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));

@@ -24,26 +24,79 @@ exports.getOnePost = (req, res, next) => {
 
 /* Création de post */
 exports.createPost = (req, res, next) => {
-  const postObject = req.body;
-  delete postObject._id;
-  // céation d'une nouvelle instance de l'objet Post en lui passant un objet JS
-  const post = new Post({
-    // on utlise l'opérateur spread ... pour faire une copie de tous les élements req.body
-    ...postObject,
-    // configuration de l'url de l'image
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
-  });
+  /* Dictionnaire 'mine_type', qui défini les type de fichiers accepté */
+  const MIME_TYPES = {
+    "image/jpg": "jpg",
+    "image/jpeg": "jpg",
+    "image/png": "png",
+  };
 
-  // Vérification de l'authentification de l'utilisateur avant enregistrement de la nouvelle sauce dans la base de donnée
-  if (post.userId === req.auth.userId) {
+  let post;
+
+  if (req._body === true) {
+    // On verifi si c'est un envoi sans image, soit une req avec un Body raw JSON
+    console.log("--->req._body : TRUE");
+    console.log("c'est un envoi avec un Body raw JSON");
+    if (req.body.userId === req.auth.userId) {
+      // On verifi l'authorization de l'utilisateur
+      console.log("req.auth.userId : " + req.auth.userId);
+      console.log("Création par raw JSON autorisée !");
+      const postObject = req.body;
+      console.log(postObject);
+      delete postObject._id;
+      console.log(postObject);
+
+      post = new Post({ ...postObject });
+      console.log(post);
+      post
+        .save()
+        .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
+        .catch((error) => res.status(403).json({ error }));
+    } else {
+      console.log("Création non autorisée ! ( par raw JSON )");
+      res.status(401).json({ error: "Création non autorisée !" });
+    }
+  } else if (req.body.userId === req.auth.userId) {
+    console.log("Création par form-data autorisée !");
+
+    const file = req.files.file;
+    console.log(file);
+    const newPath = __dirname.split("controllers").join("") + "images/";
+    console.log(newPath);
+    const name = req.files.file.name.split(" ").join("_");
+    console.log(name);
+    const extension = MIME_TYPES[req.files.file.mimetype];
+    console.log(extension);
+    const filename = name + Date.now() + "." + extension;
+    console.log(filename);
+
+    const postObject = req.body;
+    console.log(postObject);
+    delete postObject._id;
+    console.log(postObject);
+
+    post = new Post({
+      ...postObject,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/${filename}`,
+    });
+    console.log(post);
+
     post
       .save()
+      .then(() => {
+        file.mv(`${newPath}${filename}`, (err) => {
+          if (err) {
+            res.status(500).send({ message: "File upload failed", code: 500 });
+          }
+        });
+      })
       .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
       .catch((error) => res.status(403).json({ error }));
+
+    res.status(200).json({ message: "Création par form-data autorisée !" });
   } else {
-    res.status(401).json({ error: "Création non autorisée !" });
+    console.log("Création non autorisée ! ( par raw JSON )");
+    res.status(401).json({ error: "Création par raw JSON non autorisée !" });
   }
 };
 
@@ -56,7 +109,7 @@ exports.deletePost = (req, res, next) => {
     if (post.userId !== req.auth.userId) {
       return res.status(401).json({ error: "Requête non autorisée !" });
     } else {
-      const filename = sauce.imageUrl.split("/images/")[1];
+      const filename = post.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
         Post.deleteOne({ _id: req.params.id })
           .then((Post) => res.status(200).json({ message: "Post supprimée !" }))

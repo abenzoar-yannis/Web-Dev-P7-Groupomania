@@ -1,6 +1,7 @@
 /* --- IMPORT des PACKAGES --- */
 /* package 'express' */
 const express = require("express");
+const fileupload = require("express-fileupload");
 /* package 'mongoose */
 const mongoose = require("mongoose");
 /* package de 'dotenv' et charge les variables d'environnement stockées dans le fichier '.env' */
@@ -18,6 +19,7 @@ const postRoutes = require("./routes/post");
 
 /* --- MIDDLEWARE --- */
 app.use(express.json());
+app.use(fileupload());
 
 /* --- DATABASE --- */
 /* Connection à la base de donnée MongoDB Atlas */

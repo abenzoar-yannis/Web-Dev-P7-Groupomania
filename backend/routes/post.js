@@ -11,16 +11,17 @@ const postCtrl = require("../controllers/post");
 const auth = require("../middleware/auth");
 /* middleware "multer" */
 const multer = require("../middleware/multer-config");
+// const multerCopy = require("../middleware/multer-config copy");
 
 /* --- Logique des ROUTES --- */
 /* récupérer toutes les posts (authentification requise) */
 router.get("/", auth, postCtrl.getAllPosts);
 /* récupérer une post par son id (authentification requise) */
 router.get("/:id", auth, postCtrl.getOnePost);
-/* Création d'un nouveau post (authentification requise) */
-router.post("/", auth, multer, postCtrl.createPost);
+/* Création d'un nouveau post (authentification requise)  */
+router.post("/", auth, postCtrl.createPost);
 /* Modification d'un nouveau post (authentification requise) */
-router.put("/:id", auth, multer, postCtrl.modifyPost);
+router.put("/:id", auth, postCtrl.modifyPost);
 /* supprimer un post (authentification requise) */
 router.delete("/:id", auth, postCtrl.deletePost);
 
