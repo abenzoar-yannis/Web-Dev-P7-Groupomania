@@ -23,7 +23,7 @@ const PostUpdate = () => {
 
   useEffect(() => {
     setEditMessage(post.message);
-    setEditImage(post.imageUrl.split("images/")[1]);
+    if (post.imageUrl) setEditImage(post.imageUrl.split("images/")[1]);
   }, [post]);
 
   const editPost = async (id) => {

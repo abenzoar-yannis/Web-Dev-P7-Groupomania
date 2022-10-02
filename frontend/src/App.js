@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import DataContext from "./context/DataContext";
 
 import RequireAuth from "./components/RequireAuth";
+import PageNotFound from "./pages/PageNotFound";
 import LandingPage from "./pages/LandingPage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -11,6 +12,7 @@ import Admin from "./components/Admin";
 import DiscussionFeed from "./components/DiscussionFeed";
 import NewPost from "./components/NewPost";
 import PostUpdate from "./components/PostUpdate";
+import PostDelete from "./components/PostDelete";
 
 const App = () => {
   const { setAuth, navigate, ROLES } = useContext(DataContext);
@@ -25,7 +27,8 @@ const App = () => {
         accessToken: myAuth.accessToken,
       });
       navigate("/groupomania");
-    } else navigate("/");
+    }
+    // else navigate("/");
   }, []);
 
   return (
@@ -44,11 +47,14 @@ const App = () => {
               <Route index element={<NewPost />} />
               <Route path=":id" element={<PostUpdate />} />
             </Route>
+            <Route path="delete/:id" element={<PostDelete />} />
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />
             </Route>
           </Route>
         </Route>
+
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

@@ -12,9 +12,15 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      {posts.map((post) => (
+      {posts.length ? (
+        posts.map((post) => <Post key={post._id} post={post} />)
+      ) : (
+        <p style={{ marginTop: "2rem" }}>No posts to display.</p>
+      )}
+
+      {/* {posts.map((post) => (
         <Post key={post._id} post={post} />
-      ))}
+      ))} */}
     </section>
   );
 };

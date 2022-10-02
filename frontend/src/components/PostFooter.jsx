@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import DataContext from "../context/DataContext";
 
 // import {
@@ -11,28 +10,7 @@ import DataContext from "../context/DataContext";
 // } from "react-icons/fa";
 
 const PostFooter = ({ post }) => {
-  const { posts, setPosts, auth, ROLES, postURL } = useContext(DataContext);
-
-  const deleteAPost = async (id) => {
-    try {
-      const response = await axios.delete(`${postURL}/${id}`, {
-        headers: {
-          authorization: auth.accessToken,
-        },
-      });
-      const postsList = posts.filter((post) => post.id !== id);
-      setPosts(postsList);
-      console.log(response.data);
-    } catch (err) {
-      if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
-    }
-  };
+  const { auth, ROLES } = useContext(DataContext);
 
   return (
     <div className="post-footer">
@@ -47,6 +25,9 @@ const PostFooter = ({ post }) => {
         </button>
       </div> */}
       <div>
+        <button className="modifie-button">
+          <Link to={`/does-not-exist`}>does-not-exist</Link>
+        </button>
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
           <button className="modifie-button">
             <Link to={`/groupomania/${post._id}`}>Modifier</Link>
@@ -54,11 +35,8 @@ const PostFooter = ({ post }) => {
         ) : null}
 
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button
-            className="delete-button"
-            onClick={() => deleteAPost(post._id)}
-          >
-            Supprimer
+          <button>
+            <Link to={`/groupomania/delete/${post._id}`}>Supprimer</Link>
           </button>
         ) : null}
       </div>
