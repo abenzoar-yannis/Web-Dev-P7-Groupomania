@@ -1,12 +1,13 @@
 import { FiSend } from "react-icons/fi";
 import { useState, useContext } from "react";
-import { format } from "date-fns";
+import { format, setDate } from "date-fns";
 import axios from "axios";
+import axiosError from "../utils/axiosError";
 import DataContext from "../context/DataContext";
 
 const NewPost = () => {
   const [postMessage, setPostMessage] = useState("");
-  const { posts, setPosts, auth, postURL } = useContext(DataContext);
+  const { data, posts, setPosts, auth, postURL } = useContext(DataContext);
 
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
@@ -16,18 +17,6 @@ const NewPost = () => {
     setFileName(e.target.files[0].name);
     console.log(e.target.files[0]);
     console.log(e.target.files[0].name);
-  };
-
-  const uploadFile = async (e) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", fileName);
-    try {
-      const res = await axios.post("http://localhost:3000/upload", formData);
-      console.log(res);
-    } catch (ex) {
-      console.log(ex);
-    }
   };
 
   const newPostSubmit = async () => {
@@ -62,18 +51,15 @@ const NewPost = () => {
           authorization: auth.accessToken,
         },
       });
-      const allPosts = [...posts, response.data];
-      setPosts(allPosts);
       setPostMessage("");
-      console.log(response);
+      console.log(response.data);
+
+      const newData = await data.unshift(response.data.post);
+      setPosts(data);
+      setFile();
+      setFileName("");
     } catch (err) {
-      if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
+      axiosError(err);
     }
   };
 

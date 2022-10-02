@@ -4,14 +4,15 @@ import fetchAllPosts from "../utils/fetchAllPosts";
 import Post from "./Post";
 
 const Feed = () => {
-  const { setPosts, postURL, auth, data, setData } = useContext(DataContext);
+  const { postURL, auth, setData, posts, setPosts } = useContext(DataContext);
 
   useEffect(() => {
     fetchAllPosts(postURL, auth, setData, setPosts);
-  }, [setPosts, setData, postURL, auth]);
+  }, [setPosts]);
+
   return (
     <section className="feed">
-      {data.reverse().map((post) => (
+      {posts.map((post) => (
         <Post key={post._id} post={post} />
       ))}
     </section>

@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import DataContext from "./context/DataContext";
+
+import RequireAuth from "./components/RequireAuth";
 import LandingPage from "./pages/LandingPage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Groupomania from "./pages/Groupomania";
-import DiscussionFeed from "./components/DiscussionFeed";
 import Admin from "./components/Admin";
-import PostUpdate from "./components/PostUpdate";
-import RequireAuth from "./components/RequireAuth";
-
-import DataContext from "./context/DataContext";
-import { useEffect, useContext } from "react";
+import DiscussionFeed from "./components/DiscussionFeed";
 import NewPost from "./components/NewPost";
+import PostUpdate from "./components/PostUpdate";
 
 const App = () => {
   const { setAuth, navigate, ROLES } = useContext(DataContext);
@@ -26,13 +26,12 @@ const App = () => {
       });
       navigate("/groupomania");
     } else navigate("/");
-  }, [setAuth]);
+  }, []);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LandingPage />}>
-          {/* <Route index path="/" element={<Nav />} /> */}
           <Route index element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
@@ -41,13 +40,9 @@ const App = () => {
           element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
         >
           <Route path="/groupomania" element={<Groupomania />}>
-            <Route
-              element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
-            >
-              <Route element={<DiscussionFeed />}>
-                <Route index element={<NewPost />} />
-                <Route path=":id" element={<PostUpdate />} />
-              </Route>
+            <Route element={<DiscussionFeed />}>
+              <Route index element={<NewPost />} />
+              <Route path=":id" element={<PostUpdate />} />
             </Route>
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />

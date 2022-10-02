@@ -44,13 +44,14 @@ exports.createPost = (req, res, next) => {
       const postObject = req.body;
       console.log(postObject);
       delete postObject._id;
-      console.log(postObject);
 
       post = new Post({ ...postObject });
       console.log(post);
       post
         .save()
-        .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
+        .then((post) =>
+          res.status(201).json({ message: "Post enregistrée!", post: post })
+        )
         .catch((error) => res.status(403).json({ error }));
     } else {
       console.log("Création non autorisée ! ( par raw JSON )");
@@ -90,10 +91,10 @@ exports.createPost = (req, res, next) => {
           }
         });
       })
-      .then((post) => res.status(201).json({ message: "Post enregistrée!" }))
+      .then((post) =>
+        res.status(201).json({ message: "Post enregistrée!", post: post })
+      )
       .catch((error) => res.status(403).json({ error }));
-
-    res.status(200).json({ message: "Création par form-data autorisée !" });
   } else {
     console.log("Création non autorisée ! ( par raw JSON )");
     res.status(401).json({ error: "Création par raw JSON non autorisée !" });
@@ -108,63 +109,166 @@ exports.deletePost = (req, res, next) => {
     }
     if (post.userId !== req.auth.userId) {
       return res.status(401).json({ error: "Requête non autorisée !" });
-    } else {
-      const filename = post.imageUrl.split("/images/")[1];
+    }
+    if (post.imageUrl) {
+      const filename = post.imageUrl.split("images/")[1];
       fs.unlink(`images/${filename}`, () => {
         Post.deleteOne({ _id: req.params.id })
           .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
           .catch((error) => res.status(403).json({ error }));
-      }).catch((error) => res.status(400).json({ error }));
+      });
+    } else {
+      Post.deleteOne({ _id: req.params.id })
+        .then((Post) => res.status(200).json({ message: "Post supprimée !" }))
+        .catch((error) => res.status(403).json({ error }));
     }
   });
 };
+
+/* ================================================================ */
 
 /* modification d'un post */
 exports.modifyPost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id }).then((post) => {
-    // stockage des modification du post
-    const postObject = req.file
-      ? {
-          ...JSON.parse(req.body.post),
-          imageUrl: `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`,
-        }
-      : { ...req.body };
+  // console.log("===> REQUETE : ");
+  // console.log(req);
 
-    // Vérifi si l'userId du post modifiée est le même que l'userId du post avant modification
-    if (postObject.userId && postObject.userId !== post.userId) {
-      res.status(401).json({ error: "Modification non autorisée !" });
+  console.log("===> PARAMS");
+  console.log(req.params);
+
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    /* Dictionnaire 'mine_type', qui défini les type de fichiers accepté */
+    const MIME_TYPES = {
+      "image/jpg": "jpg",
+      "image/jpeg": "jpg",
+      "image/png": "png",
+    };
+
+    console.log("===> POST");
+    console.log(post);
+
+    if (req.body.userId !== req.auth.userId) {
+      res
+        .status(401)
+        .send({ code: 401, message: "Uttilisateur non autorisée !" });
     }
 
     if (!post) {
-      return res.status(404).json({ error: "Post non trouvée !" });
+      res.status(404).send({ code: 404, message: "Post non trouvée !" });
     }
 
-    if (req.file) {
-      Post.findOne({ _id: req.params.id })
-        .then((post) => {
-          const filename = post.imageUrl.split("/images/")[1];
-          fs.unlink(`images/${filename}`, (error) => {
-            if (error) {
-              throw new Error(error);
+    if (req._body === true) {
+      console.log("--->req._body : TRUE");
+      const postObject = req.body;
+      console.log("===> postObject : ");
+      console.log(postObject);
+      delete postObject._id;
+
+      // modification du post
+      Post.updateOne(
+        // 1er argument : le post à modifier
+        // 2ème argument : la version modifié du post, celle envoyée dans la requête
+        { _id: req.params.id },
+        { ...postObject, _id: req.params.id }
+      )
+        .then((post) =>
+          res.status(200).json({ code: 200, message: "Post bien modifiée !" })
+        )
+        .catch((error) => res.status(400).json(error));
+    } else if (req.files.file) {
+      const file = req.files.file;
+      console.log(file);
+      const newPath = __dirname.split("controllers").join("") + "images/";
+      console.log(newPath);
+      const name = req.files.file.name.split(" ").join("_");
+      console.log(name);
+      const extension = MIME_TYPES[req.files.file.mimetype];
+      console.log(extension);
+      const filename = name + Date.now() + "." + extension;
+      console.log(filename);
+      const postObject = {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${filename}`,
+      };
+      console.log(postObject);
+      if (post.imageUrl) {
+        const filename = post.imageUrl.split("images/")[1];
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) {
+            throw new Error(error);
+          }
+        });
+      }
+      Post.updateOne(
+        { _id: req.params.id },
+        { ...postObject, _id: req.params.id }
+      )
+        .then(() => {
+          file.mv(`${newPath}${filename}`, (err) => {
+            if (err) {
+              res
+                .status(500)
+                .send({ code: 500, message: "Upload du fichier echoue !" });
             }
           });
         })
+        .then(
+          res
+            .status(200)
+            .send({ code: 200, message: "Post et image bien modifiée !" })
+        )
         .catch((error) => res.status(400).json({ error: error.message }));
     }
-
-    // modification du post
-    Post.updateOne(
-      // 1er argument : le post à modifier
-      // 2ème argument : la version modifié du post, celle envoyée dans la requête
-      { _id: req.params.id },
-      { ...postObject, _id: req.params.id }
-    )
-      .then((post) => res.status(200).json({ message: "Post bien modifiée !" }))
-      .catch((error) => res.status(400).json(error));
   });
 };
+
+/* ================================================================ */
+
+/* modification d'un post */
+// exports.modifyPost = (req, res, next) => {
+//   Post.findOne({ _id: req.params.id }).then((post) => {
+//     // stockage des modification du post
+//     const postObject = req.file
+//       ? {
+//           ...JSON.parse(req.body.post),
+//           imageUrl: `${req.protocol}://${req.get("host")}/images/${
+//             req.file.filename
+//           }`,
+//         }
+//       : { ...req.body };
+
+//     // Vérifi si l'userId du post modifiée est le même que l'userId du post avant modification
+//     if (postObject.userId && postObject.userId !== post.userId) {
+//       res.status(401).json({ error: "Modification non autorisée !" });
+//     }
+
+//     if (!post) {
+//       return res.status(404).json({ error: "Post non trouvée !" });
+//     }
+
+//     if (req.file) {
+//       Post.findOne({ _id: req.params.id })
+//         .then((post) => {
+//           const filename = post.imageUrl.split("/images/")[1];
+//           fs.unlink(`images/${filename}`, (error) => {
+//             if (error) {
+//               throw new Error(error);
+//             }
+//           });
+//         })
+//         .catch((error) => res.status(400).json({ error: error.message }));
+//     }
+
+//     // modification du post
+//     Post.updateOne(
+//       // 1er argument : le post à modifier
+//       // 2ème argument : la version modifié du post, celle envoyée dans la requête
+//       { _id: req.params.id },
+//       { ...postObject, _id: req.params.id }
+//     )
+//       .then((post) => res.status(200).json({ message: "Post bien modifiée !" }))
+//       .catch((error) => res.status(400).json(error));
+//   });
+// };
 
 /* like et dislike un post */
 exports.likeAPost = (req, res, next) => {

@@ -3,25 +3,26 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import DataContext from "../context/DataContext";
 
-import {
-  FaThumbsDown,
-  FaThumbsUp,
-  FaRegThumbsDown,
-  FaRegThumbsUp,
-} from "react-icons/fa";
+// import {
+//   FaThumbsDown,
+//   FaThumbsUp,
+//   FaRegThumbsDown,
+//   FaRegThumbsUp,
+// } from "react-icons/fa";
 
 const PostFooter = ({ post }) => {
   const { posts, setPosts, auth, ROLES, postURL } = useContext(DataContext);
 
   const deleteAPost = async (id) => {
     try {
-      await axios.delete(`${postURL}/${id}`, {
+      const response = await axios.delete(`${postURL}/${id}`, {
         headers: {
           authorization: auth.accessToken,
         },
       });
       const postsList = posts.filter((post) => post.id !== id);
       setPosts(postsList);
+      console.log(response.data);
     } catch (err) {
       if (err.response) {
         console.log(err.response.data);
@@ -35,7 +36,7 @@ const PostFooter = ({ post }) => {
 
   return (
     <div className="post-footer">
-      <div>
+      {/* <div>
         <button>
           <FaThumbsUp />
           <FaRegThumbsUp />
@@ -44,7 +45,7 @@ const PostFooter = ({ post }) => {
           <FaThumbsDown />
           <FaRegThumbsDown />
         </button>
-      </div>
+      </div> */}
       <div>
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
           <button className="modifie-button">

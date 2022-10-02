@@ -2,38 +2,70 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import DataContext from "../context/DataContext";
 import axios from "axios";
+import axiosError from "../utils/axiosError";
 
 const PostUpdate = () => {
   const { id } = useParams();
   const { posts, setPosts, auth, postURL, navigate } = useContext(DataContext);
   const post = posts.find((post) => post._id === id);
   const [editMessage, setEditMessage] = useState("");
+  const [editImage, setEditImage] = useState("");
+
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
+
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+    console.log(e.target.files[0]);
+    console.log(e.target.files[0].name);
+  };
 
   useEffect(() => {
     setEditMessage(post.message);
+    setEditImage(post.imageUrl.split("images/")[1]);
   }, [post]);
 
   const editPost = async (id) => {
-    const updatedPost = { message: editMessage };
+    let updatedPost;
+    const userId = JSON.parse(sessionStorage.getItem("groupomaniaId")).userId;
+
+    if (file) {
+      updatedPost = new FormData();
+      updatedPost.append("file", file);
+      console.log(file);
+      updatedPost.append("fileName", fileName);
+      console.log("fileName :" + fileName);
+      updatedPost.append("userId", userId);
+      console.log("userId :" + userId);
+      updatedPost.append("userName", post.userName);
+      console.log("userName :" + post.userName);
+      updatedPost.append("date", post.date);
+      console.log("date :" + post.date);
+      updatedPost.append("message", editMessage);
+      console.log("message :" + editMessage);
+    } else {
+      updatedPost = { userId: userId, message: editMessage };
+      console.log(updatedPost);
+    }
+
     try {
       const response = await axios.put(`${postURL}/${id}`, updatedPost, {
         headers: {
           authorization: auth.accessToken,
         },
       });
+      console.log(response.data);
+      setEditMessage("");
+      setEditImage("");
+      setFile();
+      setFileName("");
       setPosts(
         posts.map((post) => (post.id === id ? { ...response.data } : post))
       );
-      setEditMessage("");
       navigate("/groupomania");
     } catch (err) {
-      if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
+      axiosError(err);
     }
   };
 
@@ -43,6 +75,13 @@ const PostUpdate = () => {
         <>
           <form className="feed-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="message">Message à éditer :</label>
+            <p>{!file ? editImage : fileName}</p>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              onChange={(e) => saveFile(e)}
+            />
             <div>
               <textarea
                 id="message"

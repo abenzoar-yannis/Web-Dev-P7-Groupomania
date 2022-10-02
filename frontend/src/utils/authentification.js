@@ -5,7 +5,6 @@ const authentification = (res) => {
   const accessToken = res.data.token;
   const userAuthLinea = { userId, userName, role, accessToken };
   const userAuthJSON = JSON.stringify(userAuthLinea);
-  /* Je met pour l'instant l'ID et le TOKEN en sessionStorage (Où alors ? un state ?) */
   sessionStorage.setItem("groupomaniaId", userAuthJSON);
 
   return userAuthLinea;
