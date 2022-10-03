@@ -29,7 +29,8 @@ body {
   background: #fff;
 }
 
-h1,
+h1 {
+}
 h2,
 h3,
 h4 {
@@ -38,7 +39,9 @@ h4 {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #fff;
   text-align: center;
 }
 
@@ -59,12 +62,11 @@ button {
     cursor: pointer;
   }
 }
-
-.btn {
-  padding: 0.5rem;
+.main-button {
+  width: 100%;
+  padding: 1rem;
   border: none;
   border-radius: 0.5rem;
-  background: $color-secondary;
   font-weight: 600;
 
   &:hover {

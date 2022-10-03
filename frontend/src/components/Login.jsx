@@ -97,7 +97,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="btn submit" type="submit">
+        <button className="main-button color-valid" type="submit">
           Se connecter
         </button>
       </form>

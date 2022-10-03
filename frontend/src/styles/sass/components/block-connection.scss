@@ -72,6 +72,12 @@
 .color-valid {
   background: $color-valid;
 }
+.color-nav {
+  background: $color-nav;
+  &:hover {
+    background: darken($color: $color-nav, $amount: 10);
+  }
+}
 
 .succes-message {
   height: 3rem;

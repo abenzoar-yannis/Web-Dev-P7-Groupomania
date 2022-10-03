@@ -107,7 +107,12 @@ const Signup = () => {
           ) : null}
         </div>
         <button
-          className="btn submit"
+          className="main-button"
+          style={
+            emailValidity && passwordValidity
+              ? { background: "#2cff6c" }
+              : { background: "#d2ffdf" }
+          }
           type="submit"
           onClick={(e) =>
             createNewAccount(
