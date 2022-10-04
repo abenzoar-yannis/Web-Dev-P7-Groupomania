@@ -70,7 +70,7 @@ const PostUpdate = () => {
   };
 
   return (
-    <section className="feed-new-post">
+    <section className="feed-set-post">
       {editMessage && (
         <>
           <form className="feed-form" onSubmit={(e) => e.preventDefault()}>

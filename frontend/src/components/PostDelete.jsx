@@ -36,26 +36,26 @@ const PostDelete = () => {
         <h2>Suppression de Post</h2>
       </section>
 
-      <section className="feed">
-        <p>Etes vous sur de vouloir supprimer le message :</p>
+      <section className="feed suppression-block">
+        <h3>Etes vous sur de vouloir supprimer le message :</h3>
         <p>
-          {post.message.length <= 25
+          {post.message.length <= 50
             ? post.message
-            : `${post.message.slice(0, 25)}...`}
+            : `${post.message.slice(0, 50)}...`}
         </p>
         {post.imageUrl ? (
-          <p>Et son image {post.imageUrl.split("images/")[1]}</p>
+          <p>Et son image : {post.imageUrl.split("images/")[1]}</p>
         ) : null}
         <div>
           <button
-            className="delete-button"
             onClick={() => deleteAPost(post._id)}
+            className="delete-button"
           >
-            Supprimer : {post._id}
+            Supprimer
           </button>
-          <p>
+          <button className="modify-button">
             <Link to="/groupomania">Annuler</Link>
-          </p>
+          </button>
         </div>
       </section>
     </main>

@@ -19,7 +19,7 @@ const GroupomaniaNavigation = () => {
       {auth.role === ROLES.Admin && pagePath === "/groupomania" ? (
         <button>
           <Link to="/groupomania/admin">
-            <GrUserAdmin /> Administration
+            <GrUserAdmin /> Admin
           </Link>
         </button>
       ) : pagePath === "/groupomania/admin" ? (

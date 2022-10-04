@@ -1,4 +1,3 @@
-import { FiSend } from "react-icons/fi";
 import { useState, useContext } from "react";
 import { format, setDate } from "date-fns";
 import axios from "axios";
@@ -64,23 +63,21 @@ const NewPost = () => {
   };
 
   return (
-    <section className="feed-new-post">
+    <section className="feed-set-post">
       <form
         className="feed-form"
         encType="mutipart/form-data"
         onSubmit={(e) => e.preventDefault()}
       >
         <label htmlFor="message">Ecrire un post : </label>
+        <label htmlFor="add-image">Ajouter une image</label>
+        <input
+          type="file"
+          name="add-image"
+          id="add-image"
+          onChange={(e) => saveFile(e)}
+        />
         <div>
-          <div>
-            <label htmlFor="add-image">Ajouter une image</label>
-            <input
-              type="file"
-              name="add-image"
-              id="add-image"
-              onChange={(e) => saveFile(e)}
-            />
-          </div>
           <textarea
             id="message"
             required
@@ -88,7 +85,7 @@ const NewPost = () => {
             onChange={(e) => setPostMessage(e.target.value)}
           />
           <button type="submit" onClick={newPostSubmit}>
-            <FiSend /> Envoyer
+            Envoyer
           </button>
         </div>
       </form>

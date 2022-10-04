@@ -60,6 +60,7 @@ button {
   background: $color-secondary;
   &:hover {
     cursor: pointer;
+    background: darken($color: $color-secondary, $amount: 5);
   }
 }
 .main-button {

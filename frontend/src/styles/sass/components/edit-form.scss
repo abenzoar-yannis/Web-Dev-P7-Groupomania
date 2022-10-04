@@ -1,27 +1,28 @@
 .feed-form {
   @include display-flex-column;
   height: 100%;
+  width: 100%;
   label {
-    padding: 0.4rem;
+    padding: 0.2rem;
     color: $color-primary;
     font-weight: bold;
   }
   textarea {
-    height: 100%;
-    width: 80%;
+    height: 6rem;
+    width: calc(100% - 100px);
   }
   & > div {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding: 0 1rem 0.5rem;
+    padding: 0.5rem;
     & > div {
       @include display-flex-column-align-center;
       justify-content: space-evenly;
       height: 100%;
-      width: 20%;
+      width: 100px;
       padding: 0.3rem;
     }
   }

@@ -5,19 +5,23 @@ const GroupomaniaHeader = () => {
   const { auth } = useAuth();
 
   return (
-    <header className="groupomania-header">
-      <div className="main-title">
-        <h1>Groupomania</h1>
-      </div>
-
-      <div className="header-bottom">
-        <div className="block-userid">
-          <p>{auth.role}</p>
-          <p>{auth.userName}</p>
+    <>
+      <header className="landing-page-header">
+        <div className="block-logo">
+          <img src="./images/groupomania-icon.png" alt="groupomania-icon" />
         </div>
-        <GroupomaniaNavigation />
-      </div>
-    </header>
+        <div className="block-title">
+          <h1>Groupomania</h1>
+        </div>
+        <div className="header-info">
+          <div className="block-userid">
+            <p>{auth.userName}</p>
+            <p>{auth.role}</p>
+          </div>
+          <GroupomaniaNavigation />
+        </div>
+      </header>
+    </>
   );
 };
 

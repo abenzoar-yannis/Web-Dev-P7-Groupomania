@@ -84,43 +84,42 @@ const PostFooter = ({ post }) => {
 
   return (
     <div className="post-footer">
-      <div
-        style={{
-          width: "75px",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
-        <div>
+      <div className="likeble-block">
+        <div className="liked-block">
           {like === 1 ? (
-            <FaThumbsUp fill="blue" onClick={newLike} />
+            <FaThumbsUp
+              // style={{ width: "2em", height: "1.5em" }}
+              fill="#6e96ff"
+              onClick={newLike}
+            />
           ) : (
-            <FaRegThumbsUp onClick={newLike} />
+            <FaRegThumbsUp
+              fill="#4e5166"
+              // style={{ width: "2em", height: "1.5em" }}
+              onClick={newLike}
+            />
           )}
-
-          {post.likes}
+          <p>{post.likes}</p>
         </div>
-        <div>
+        <div className="disliked-block">
           {like === -1 ? (
-            <FaThumbsDown fill="blue" onClick={newDislike} />
+            <FaThumbsDown fill="#ff412c" onClick={newDislike} />
           ) : (
-            <FaRegThumbsDown onClick={newDislike} />
+            <FaRegThumbsDown fill="#4e5166" onClick={newDislike} />
           )}
-
-          {post.dislikes}
+          <p>{post.dislikes}</p>
         </div>
       </div>
 
-      <div>
+      <div className="nav-edit-post">
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button className="modifie-button">
+          <button className="modify-button">
             <Link to={`/groupomania/${post._id}`}>Modifier</Link>
           </button>
         ) : null}
 
         {auth.role === ROLES.Admin || auth.userId === post.userId ? (
-          <button>
+          <button className="delete-button">
             <Link to={`/groupomania/delete/${post._id}`}>Supprimer</Link>
           </button>
         ) : null}
