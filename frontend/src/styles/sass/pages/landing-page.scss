@@ -1,29 +1,6 @@
 /* Landing Page CSS
 ./sass/pages/landing-page.scss */
 
-/* Header */
-.landing-page-header {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  background: $color-primary;
-}
-.block-logo {
-  height: 100%;
-  max-width: 150px;
-  @include display-flex-center-center;
-  border-bottom: solid 1px $color-primary;
-  overflow: hidden;
-  img {
-    width: 110%;
-  }
-}
-.block-title {
-  height: 100%;
-  width: 100%;
-  @include display-flex-center-center;
-}
-
 .landing-page-main {
   padding: 60px 20px;
   @include display-flex-column-align-center;
@@ -37,5 +14,11 @@
   p {
     font-size: 1.5rem;
     text-align: center;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .block-logo {
+    visibility: hidden;
   }
 }

@@ -6,7 +6,7 @@ const GroupomaniaHeader = () => {
 
   return (
     <>
-      <header className="landing-page-header">
+      <header>
         <div className="block-logo">
           <img src="./images/groupomania-icon.png" alt="groupomania-icon" />
         </div>

@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
-import { format, setDate } from "date-fns";
+import { format } from "date-fns";
 import axios from "axios";
 import axiosError from "../utils/axiosError";
 import DataContext from "../context/DataContext";
 
 const NewPost = () => {
   const [postMessage, setPostMessage] = useState("");
-  const { data, posts, setPosts, auth, postURL } = useContext(DataContext);
+  const { auth, postURL } = useContext(DataContext);
 
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
@@ -14,8 +14,6 @@ const NewPost = () => {
   const saveFile = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
-    console.log(e.target.files[0]);
-    console.log(e.target.files[0].name);
   };
 
   const newPostSubmit = async () => {
@@ -29,17 +27,11 @@ const NewPost = () => {
     if (file) {
       newPost = new FormData();
       newPost.append("file", file);
-      console.log(file);
       newPost.append("fileName", fileName);
-      console.log("fileName :" + fileName);
       newPost.append("userId", userId);
-      console.log("userId :" + userId);
       newPost.append("userName", userName);
-      console.log("userName :" + userName);
       newPost.append("date", date);
-      console.log("date :" + date);
       newPost.append("message", postMessage);
-      console.log("message :" + postMessage);
     } else {
       newPost = { userId, userName, date, message: postMessage };
     }
@@ -50,11 +42,8 @@ const NewPost = () => {
           authorization: auth.accessToken,
         },
       });
-      setPostMessage("");
       console.log(response.data);
-
-      const newData = await data.unshift(response.data.post);
-      setPosts(data);
+      setPostMessage("");
       setFile();
       setFileName("");
     } catch (err) {

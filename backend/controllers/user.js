@@ -24,7 +24,6 @@ exports.signup = (req, res, next) => {
         .save()
         .then(() => {
           res.status(201).json({ message: "Votre compte a été créé !" });
-          console.log("Nouveau compte cree !");
         })
         .catch((error) => res.status(400).json({ error }));
     })

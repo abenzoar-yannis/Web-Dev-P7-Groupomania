@@ -74,7 +74,7 @@
 .likeble-block {
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  padding: 0.4rem 0 0.4rem 1rem;
   svg {
     height: 1.5em;
     width: 2em;
@@ -111,17 +111,4 @@
 }
 .delete-button:hover {
   background: $color-cancel;
-}
-
-.feed-set-post {
-  height: 200px;
-  width: 100%;
-
-  background: $color-secondary;
-
-  border-top: solid 2px $color-tertiary;
-  border-right: solid 2px $color-tertiary;
-  border-left: solid 2px $color-tertiary;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
 }

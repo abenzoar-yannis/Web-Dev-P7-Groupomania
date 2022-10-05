@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import axios from "axios";
 import DataContext from "../context/DataContext";
+import axiosError from "../utils/axiosError";
 
 const Admin = () => {
   const { users, setUsers, authURL, auth } = useContext(DataContext);
@@ -15,17 +16,11 @@ const Admin = () => {
         });
         setUsers(response.data);
       } catch (err) {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else {
-          console.log(`Error: ${err.message}`);
-        }
+        axiosError(err);
       }
     };
 
-    fetchAllUsers("get");
+    fetchAllUsers();
   }, [setUsers, authURL, auth.accessToken]);
 
   const deleteAUser = async (id) => {
@@ -38,13 +33,7 @@ const Admin = () => {
       const usersList = users.filter((user) => user._id !== id);
       setUsers(usersList);
     } catch (err) {
-      if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
+      axiosError(err);
     }
   };
 

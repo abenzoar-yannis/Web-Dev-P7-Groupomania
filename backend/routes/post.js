@@ -9,9 +9,6 @@ const router = express.Router();
 const postCtrl = require("../controllers/post");
 /* middleware d'authentification */
 const auth = require("../middleware/auth");
-/* middleware "multer" */
-const multer = require("../middleware/multer-config");
-// const multerCopy = require("../middleware/multer-config copy");
 
 /* --- Logique des ROUTES --- */
 /* récupérer toutes les posts (authentification requise) */

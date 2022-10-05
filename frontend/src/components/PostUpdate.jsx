@@ -6,7 +6,7 @@ import axiosError from "../utils/axiosError";
 
 const PostUpdate = () => {
   const { id } = useParams();
-  const { posts, setPosts, auth, postURL, navigate } = useContext(DataContext);
+  const { posts, auth, postURL, navigate } = useContext(DataContext);
   const post = posts.find((post) => post._id === id);
   const [editMessage, setEditMessage] = useState("");
   const [editImage, setEditImage] = useState("");
@@ -33,20 +33,13 @@ const PostUpdate = () => {
     if (file) {
       updatedPost = new FormData();
       updatedPost.append("file", file);
-      console.log(file);
       updatedPost.append("fileName", fileName);
-      console.log("fileName :" + fileName);
       updatedPost.append("userId", userId);
-      console.log("userId :" + userId);
       updatedPost.append("userName", post.userName);
-      console.log("userName :" + post.userName);
       updatedPost.append("date", post.date);
-      console.log("date :" + post.date);
       updatedPost.append("message", editMessage);
-      console.log("message :" + editMessage);
     } else {
       updatedPost = { userId: userId, message: editMessage };
-      console.log(updatedPost);
     }
 
     try {
@@ -60,9 +53,6 @@ const PostUpdate = () => {
       setEditImage("");
       setFile();
       setFileName("");
-      setPosts(
-        posts.map((post) => (post.id === id ? { ...response.data } : post))
-      );
       navigate("/groupomania");
     } catch (err) {
       axiosError(err);

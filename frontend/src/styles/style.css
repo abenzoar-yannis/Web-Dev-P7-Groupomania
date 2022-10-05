@@ -100,10 +100,39 @@ textarea {
   background: #fff;
 }
 
+@media all and (max-width: 575px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
 /* Landing Page CSS
 ./sass/pages/landing-page.scss */
+.landing-page-main {
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.presentation-block {
+  max-width: 600px;
+  text-align: center;
+}
+.presentation-block h2 {
+  font-size: 2rem;
+}
+.presentation-block p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+@media all and (max-width: 420px) {
+  .block-logo {
+    visibility: hidden;
+  }
+}
 /* Header */
-.landing-page-header {
+header {
   width: 100%;
   height: 100px;
   display: flex;
@@ -129,25 +158,6 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.landing-page-main {
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.presentation-block {
-  max-width: 600px;
-  text-align: center;
-}
-.presentation-block h2 {
-  font-size: 2rem;
-}
-.presentation-block p {
-  font-size: 1.5rem;
-  text-align: center;
 }
 
 .header-info {
@@ -188,6 +198,14 @@ textarea {
   flex-wrap: nowrap;
 }
 
+@media all and (max-width: 360px) {
+  .header-info * {
+    font-size: 0.8rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
 .administration-header {
   height: 40px;
   width: 100%;
@@ -218,7 +236,6 @@ textarea {
 
 table {
   width: 100%;
-  border: 0.1rem solid #4e5166;
 }
 
 thead {
@@ -226,10 +243,17 @@ thead {
 }
 thead tr {
   background: #ffd7d7;
+  border: 0.1rem solid #4e5166;
 }
 
 tbody {
   width: 100%;
+}
+tbody tr {
+  box-shadow: 0 0 3px #4e5166;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  margin: 0.4rem 0;
 }
 
 th {
@@ -243,14 +267,12 @@ tr {
   width: 100%;
   height: 2rem;
   display: flex;
-  border: 0.1rem solid #4e5166;
 }
 
 td {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.1rem solid #4e5166;
 }
 td button {
   height: 100%;
@@ -505,7 +527,7 @@ td button:hover {
 .likeble-block {
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  padding: 0.4rem 0 0.4rem 1rem;
 }
 .likeble-block svg {
   height: 1.5em;
@@ -551,6 +573,7 @@ td button:hover {
 .feed-set-post {
   height: 200px;
   width: 100%;
+  padding-left: 0.5rem;
   background: #ffd7d7;
   border-top: solid 2px #4e5166;
   border-right: solid 2px #4e5166;
@@ -579,7 +602,7 @@ td button:hover {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
 }
 .feed-form > div > div {
   display: flex;

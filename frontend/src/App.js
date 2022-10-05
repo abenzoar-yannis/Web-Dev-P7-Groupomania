@@ -27,8 +27,7 @@ const App = () => {
         accessToken: myAuth.accessToken,
       });
       navigate("/groupomania");
-    }
-    // else navigate("/");
+    } else navigate("/");
   }, []);
 
   return (

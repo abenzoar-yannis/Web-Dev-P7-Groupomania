@@ -1,14 +1,28 @@
 import { useEffect, useContext } from "react";
 import DataContext from "../context/DataContext";
-import fetchAllPosts from "../utils/fetchAllPosts";
 import Post from "./Post";
+import axios from "axios";
+import axiosError from "../utils/axiosError";
 
 const Feed = () => {
-  const { postURL, auth, setData, posts, setPosts } = useContext(DataContext);
+  const { postURL, auth, posts, setPosts } = useContext(DataContext);
 
   useEffect(() => {
-    fetchAllPosts(postURL, auth, setData, setPosts);
-  }, [setPosts]);
+    const fetchAllPosts = async () => {
+      try {
+        const response = await axios.get(`${postURL}`, {
+          headers: {
+            authorization: auth.accessToken,
+          },
+        });
+        const reverseData = response.data.reverse();
+        setPosts(reverseData);
+      } catch (err) {
+        axiosError(err);
+      }
+    };
+    fetchAllPosts();
+  }, [auth.accessToken, postURL, setPosts]);
 
   return (
     <section className="feed">
@@ -17,10 +31,6 @@ const Feed = () => {
       ) : (
         <p>No posts to display.</p>
       )}
-
-      {/* {posts.map((post) => (
-        <Post key={post._id} post={post} />
-      ))} */}
     </section>
   );
 };

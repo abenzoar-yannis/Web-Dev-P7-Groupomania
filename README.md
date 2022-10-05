@@ -34,13 +34,13 @@ npm install
 Start :
 
 ```bash
-node server
+npm run node server
 ```
 
 Dev :
 
 ```bash
-nodemon server
+npm run nodemon server
 ```
 
 ## Installation du frontend
@@ -56,7 +56,7 @@ npm install
 ### Démarrer le serveur
 
 ```bash
-npm start
+npm run start
 ```
 
 ### Modifier le CSS via Sass

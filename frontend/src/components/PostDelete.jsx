@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import axiosError from "../utils/axiosError";
 import DataContext from "../context/DataContext";
 
 const PostDelete = () => {
@@ -20,13 +21,7 @@ const PostDelete = () => {
       console.log(response.data);
       navigate("/groupomania");
     } catch (err) {
-      if (err.response) {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      } else {
-        console.log(`Error: ${err.message}`);
-      }
+      axiosError(err);
     }
   };
 

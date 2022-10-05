@@ -13,34 +13,11 @@ import {
 
 const PostFooter = ({ post }) => {
   const { auth, ROLES, postURL } = useContext(DataContext);
-
   const [like, setLike] = useState(0);
-  useEffect(() => {
-    if (
-      post.usersLiked.find((user) => user === auth.userId) === undefined &&
-      post.usersDisliked.find((user) => user === auth.userId) === undefined
-    ) {
-      setLike(0);
-      console.log("useEffect a set Like sur 0");
-    }
-    if (
-      post.usersDisliked.find((user) => user === auth.userId) === auth.userId
-    ) {
-      setLike(-1);
-      console.log("useEffect a set Like sur -1");
-    }
-    if (post.usersLiked.find((user) => user === auth.userId) === auth.userId) {
-      setLike(1);
-      console.log("useEffect a set Like sur 1");
-    }
-  }, []);
 
   const likePost = async (id, newIndex) => {
-    let updatedPost;
     const userId = JSON.parse(sessionStorage.getItem("groupomaniaId")).userId;
-
-    updatedPost = { userId: userId, like: newIndex };
-    console.log(updatedPost);
+    const updatedPost = { userId: userId, like: newIndex };
 
     try {
       const response = await axios.put(`${postURL}/${id}/like`, updatedPost, {
@@ -58,11 +35,9 @@ const PostFooter = ({ post }) => {
     if (like === 0) {
       setLike(1);
       likePost(post._id, 1);
-      console.log("Like c'est set sur 1");
     } else if (like === 1) {
       setLike(0);
       likePost(post._id, 0);
-      console.log("Like c'est set sur 0");
     } else {
       console.log("Retirer votre dislike avant de like");
     }
@@ -72,32 +47,39 @@ const PostFooter = ({ post }) => {
     if (like === 0) {
       setLike(-1);
       likePost(post._id, -1);
-      console.log("Like c'est set sur -1");
     } else if (like === -1) {
       setLike(0);
       likePost(post._id, 0);
-      console.log("Like c'est set sur 0");
     } else {
       console.log("Retirer votre dislike avant de like");
     }
   };
+
+  useEffect(() => {
+    if (
+      post.usersLiked.find((user) => user === auth.userId) === undefined &&
+      post.usersDisliked.find((user) => user === auth.userId) === undefined
+    ) {
+      setLike(0);
+    }
+    if (
+      post.usersDisliked.find((user) => user === auth.userId) === auth.userId
+    ) {
+      setLike(-1);
+    }
+    if (post.usersLiked.find((user) => user === auth.userId) === auth.userId) {
+      setLike(1);
+    }
+  }, [auth.userId, post.usersDisliked, post.usersLiked]);
 
   return (
     <div className="post-footer">
       <div className="likeble-block">
         <div className="liked-block">
           {like === 1 ? (
-            <FaThumbsUp
-              // style={{ width: "2em", height: "1.5em" }}
-              fill="#6e96ff"
-              onClick={newLike}
-            />
+            <FaThumbsUp fill="#6e96ff" onClick={newLike} />
           ) : (
-            <FaRegThumbsUp
-              fill="#4e5166"
-              // style={{ width: "2em", height: "1.5em" }}
-              onClick={newLike}
-            />
+            <FaRegThumbsUp fill="#4e5166" onClick={newLike} />
           )}
           <p>{post.likes}</p>
         </div>
